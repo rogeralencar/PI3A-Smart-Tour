@@ -1,6 +1,6 @@
 {
-    "name": "pi",
-    "short_name": "pi",
+    "name": "smart_tour",
+    "short_name": "smart_tour",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

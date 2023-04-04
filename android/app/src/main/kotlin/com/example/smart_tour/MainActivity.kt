@@ -1,4 +1,4 @@
-package com.example.pi
+package com.example.smart_tour
 
 import io.flutter.embedding.android.FlutterActivity
 
