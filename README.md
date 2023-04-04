@@ -2,7 +2,7 @@ Smart Tour
 ==========
 ## A Flutter Project
 
-![](https://github.com/rogeralencar/PI3A-Smart-Tour/tree/main/lib/assets/images/splash.png)
+![](https://www.saopaulo.sp.gov.br/wp-content/uploads/2020/09/turismo.png)
 
 # Index
 
@@ -59,10 +59,8 @@ flutter run
 
 # 👨‍💻 Authors
 
-| [<img src="https://avatars.githubusercontent.com/u/70274921?s=400&u=c1688d6fcd13223bfe1093c6d16b3b6b646545fe&v=4" width=115><br><sub>Guilherme Queiroz Ribeiro</sub>](https://github.com/Gui1111RIbeiro)
-| :---: |
-| [<img src="https://avatars.githubusercontent.com/u/51916539?v=4" width=115><br><sub>Roger Alencar</sub>](https://github.com/rogeralencar)
-| :---: |
+| [<img src="https://avatars.githubusercontent.com/u/70274921?s=400&u=c1688d6fcd13223bfe1093c6d16b3b6b646545fe&v=4" width=115><br><sub>Guilherme Queiroz Ribeiro</sub>](https://github.com/Gui1111RIbeiro) | [<img src="https://avatars.githubusercontent.com/u/51916539?v=4" width=115><br><sub>Roger Alencar</sub>](https://github.com/rogeralencar)
+| :---: | :---: |
 
 ### End
 
