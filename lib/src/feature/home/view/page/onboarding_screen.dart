@@ -1,34 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:localization/localization.dart';
 
 import 'onboarding_details.dart';
-import 'form_screen.dart';
 
-class OnboardingScreen extends StatefulWidget {
-  const OnboardingScreen({super.key});
+class OnBoardingScreen extends StatefulWidget {
+  const OnBoardingScreen({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
-  _OnboardingScreenState createState() => _OnboardingScreenState();
+  OnBoardingScreenState createState() => OnBoardingScreenState();
 }
 
-class _OnboardingScreenState extends State<OnboardingScreen> {
+class OnBoardingScreenState extends State<OnBoardingScreen> {
+  @override
+  void initState() {
+    super.initState();
+    initialization();
+  }
+
+  void initialization() async {
+    FlutterNativeSplash.remove();
+  }
+
   int _currentPage = 0;
+
   final PageController _pageController = PageController(initialPage: 0);
   final List<Widget> _pages = [
-    OnboardingDetails(
-        title: 'Bem-vindo ao SmartTour',
-        subtitle: 'Um app para deixar suas férias ainda melhores!',
+    OnBoardingDetails(
+        title: 'Onboard_title1'.i18n(),
+        subtitle: 'Onboard_sub_title1'.i18n(),
         image: Image.asset('lib/assets/images/onboarding1.png')),
-    OnboardingDetails(
-        title: 'Começe agora!',
-        subtitle:
-            'Leva apenas alguns minutos, será feito um questionário para que a gente possa te conhecer melhor',
+    OnBoardingDetails(
+        title: 'Onboard_title2'.i18n(),
+        subtitle: 'Onboard_sub_title2'.i18n(),
         image: Image.asset('lib/assets/images/onboarding2.jpeg')),
-    OnboardingDetails(
-        title: 'Tenha um app adaptado para você!',
-        subtitle:
-            'Criei seu perfil para sempre nos adaptarmos a suas mudanças. Esperamos que você ame nosso app!',
+    OnBoardingDetails(
+        title: 'Onboard_title3'.i18n(),
+        subtitle: 'Onboard_sub_title3'.i18n(),
         image: Image.asset('lib/assets/images/onboarding3.png')),
   ];
 
@@ -76,9 +85,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             curve: Curves.easeInOut);
                       }
                     },
-                    child: const Text(
-                      'Back',
-                      style: TextStyle(
+                    child: Text(
+                      'Back'.i18n(),
+                      style: const TextStyle(
                         fontSize: 18,
                         color: Colors.white,
                       ),
@@ -87,11 +96,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   _currentPage != 2
                       ? TextButton(
                           onPressed: () {
-                            FormScreen();
+                            Modular.to.pushNamed('/form');
                           },
-                          child: const Text(
-                            'Skip',
-                            style: TextStyle(
+                          child: Text(
+                            'Skip'.i18n(),
+                            style: const TextStyle(
                               color: Colors.white,
                             ),
                           ),
@@ -104,11 +113,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             duration: const Duration(milliseconds: 300),
                             curve: Curves.easeInOut);
                       } else {
-                        FormScreen();
+                        Modular.to.pushNamed('/form');
                       }
                     },
                     child: Text(
-                      _currentPage == _pages.length - 1 ? 'Done' : 'Next',
+                      _currentPage == _pages.length - 1
+                          ? 'Done'.i18n()
+                          : 'Next'.i18n(),
                       style: const TextStyle(
                         fontSize: 18,
                         color: Colors.white,

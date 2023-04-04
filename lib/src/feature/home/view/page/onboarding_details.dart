@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class OnboardingDetails extends StatelessWidget {
+class OnBoardingDetails extends StatelessWidget {
   final String title;
   final String subtitle;
   final Image image;
 
-  const OnboardingDetails({
+  const OnBoardingDetails({
     super.key,
     required this.title,
     required this.subtitle,

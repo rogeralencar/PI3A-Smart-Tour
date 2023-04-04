@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:pi/src/feature/home/view/page/onboarding_screen.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
-//import 'src/feature/home/view/page/onboarding_screen.dart';
+import 'src/app_widget.dart';
+import 'src/feature/home/view/widget/onboarding_module.dart';
 
 void main() {
-  runApp(const MaterialApp(home: OnboardingScreen()));
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  runApp(
+    ModularApp(
+      module: OnBoardingModule(),
+      child: const AppWidget(),
+    ),
+  );
 }
