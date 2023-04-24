@@ -4,6 +4,10 @@
         android:label="smart_tour"
         android:name="${applicationName}"
         android:icon="@mipmap/splash">
+
+        <meta-data android:name="com.google.android.geo.API_KEY"  
+             android:value="AIzaSyDf7OTq3OtAmHtKQOYATKxJHrQqBwhEC5k"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:localization/localization.dart';
 
 import '../../../../common/form_model.dart';
 
@@ -80,6 +82,18 @@ class FormScreenState extends State<FormScreen> {
             const SizedBox(height: 20),
             FormModel(items: inputItems),
             const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Modular.to.pushNamed('/home/');
+              },
+              child: Text(
+                'Next'.i18n(),
+                style: const TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                ),
+              ),
+            ),
           ],
         ),
       ),
