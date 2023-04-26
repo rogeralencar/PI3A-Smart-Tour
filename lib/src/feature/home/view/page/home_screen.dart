@@ -24,17 +24,17 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
             colors: [
-              Color.fromARGB(255, 162, 241, 255),
-              Color.fromARGB(255, 20, 84, 109),
+              Color(0xFF0096c7),
+              Color(0xFF03045e),
             ],
           ),
         ),
         child: Column(
           children: [
-            const SizedBox(height: 80),
+            const SizedBox(height: 40),
             const Text(
               'Smart Tour',
               style: TextStyle(
@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   const Text(
-                    'Qual o destino da viagem?',
+                    'What is the destination of the trip?',
                     style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: TextField(
                       decoration: InputDecoration(
-                        hintText: 'Pesquisar',
+                        hintText: 'Search',
                         filled: true,
                         fillColor: Colors.white.withOpacity(0.5),
                         border: OutlineInputBorder(
@@ -68,6 +68,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'Suggestions',
+                    style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
                   ),
                 ],
               ),

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:localization/localization.dart';
-
-import '../../../../common/form_model.dart';
 
 class FormScreen extends StatefulWidget {
   const FormScreen({super.key});
@@ -12,12 +9,82 @@ class FormScreen extends StatefulWidget {
 }
 
 class FormScreenState extends State<FormScreen> {
-  List<String> inputItems = [
-    'Futebol',
-    'Praia',
-    'Museu',
+  List<String> interests = [
+    'Adventure',
+    'Amusement parks',
+    'Archaeological sites',
+    'Architecture',
+    'Art',
+    'Beaches',
+    'Bike tours',
+    'Botanical gardens',
+    'Brewery',
+    'Churches',
+    'Climbing',
+    'Coral reefs',
+    'Cuisine',
+    'Cultural heritage',
+    'Culture',
+    'Dance',
+    'Ecotourism',
+    'Events',
+    'Family vacations',
+    'Festivals',
+    'Forests',
+    'Gastronomic travel',
+    'Gastronomy',
+    'Golf',
+    'Helicopter tours',
+    'Historical sites',
+    'History',
+    'Hiking',
+    'Islands',
+    'Kitesurfing',
+    'Luxury',
+    'Luxury tourism',
+    'Markets',
+    'Mountain',
+    'Museums',
+    'Natural wonders',
+    'Nature',
+    'Nightlife',
+    'National parks',
+    'Ocean',
+    'Photographic safaris',
+    'Photography',
+    'Relaxation',
+    'Religious tourism',
+    'Resorts',
+    'River',
+    'Romance',
+    'Rural tourism',
+    'Ruins',
+    'Safaris',
+    'Sanctuaries',
+    'Shopping',
+    'Sightseeing tours',
+    'Skiing',
+    'Snowboarding',
+    'Spirituality',
+    'Spa',
+    'Surfing',
+    'Theater',
+    'Train tours',
+    'Villages',
+    'Volcanoes',
+    'Water parks',
+    'Whale watching',
+    'Wildlife',
+    'Wildlife refuges',
+    'Wine tasting',
+    'Local experiences',
+    'Adventure tourism',
+    'Luxury travel',
+    'Cultural life'
   ];
-  List<String> droppedItems = [];
+  List<String> selectedInterests = [];
+
+  bool get isButtonEnabled => selectedInterests.length >= 3;
 
   @override
   Widget build(BuildContext context) {
@@ -25,73 +92,67 @@ class FormScreenState extends State<FormScreen> {
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              Color.fromARGB(255, 162, 241, 255),
-              Color.fromARGB(255, 20, 84, 109),
-            ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFF0096c7),
+              Color(0xFF03045e),
+            ],
           ),
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(height: 60),
-            const Text(
-              'Quais são seus maiores interesses?',
-              style: TextStyle(fontSize: 20, color: Colors.black),
-            ),
-            const SizedBox(height: 20),
-            DragTarget<String>(
-              builder: (context, acceptedItems, rejectedItems) => Container(
-                width: 320,
-                height: 80,
-                color: Colors.white.withOpacity(0.5),
-                child: Center(
-                  child: droppedItems.isEmpty
-                      ? const Text(
-                          'Arraste aqui suas opções!',
-                          style: TextStyle(
-                            fontSize: 18,
-                          ),
-                        )
-                      : FormModel(items: droppedItems),
-                ),
-              ),
-              onWillAccept: (item) => true,
-              onAccept: (item) {
-                setState(() {
-                  if (droppedItems.contains(item)) {
-                    return;
-                  } else {
-                    droppedItems.add(item);
-                    inputItems.remove(item);
-                  }
-                });
-              },
-              onLeave: (item) {
-                setState(() {
-                  if (inputItems.contains(item)) {
-                    return;
-                  } else {
-                    inputItems.add(item!);
-                    droppedItems.remove(item);
-                  }
-                });
-              },
-            ),
-            const SizedBox(height: 20),
-            FormModel(items: inputItems),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Modular.to.pushNamed('/home/');
-              },
+            const SizedBox(height: 50),
+            const Padding(
+              padding: EdgeInsets.all(16.0),
               child: Text(
-                'Next'.i18n(),
-                style: const TextStyle(
-                  fontSize: 18,
-                  color: Colors.white,
-                ),
+                'Select at least 3 interests',
+                style: TextStyle(fontSize: 24, color: Colors.white),
+              ),
+            ),
+            Expanded(
+              child: ListView(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Wrap(
+                      alignment: WrapAlignment.center,
+                      spacing: 8.0,
+                      runSpacing: 8.0,
+                      children: List<Widget>.generate(
+                        interests.length,
+                        (int index) {
+                          final interest = interests[index];
+                          return ChoiceChip(
+                            label: Text(interest),
+                            selected: selectedInterests.contains(interest),
+                            onSelected: (bool selected) {
+                              setState(() {
+                                if (selected) {
+                                  selectedInterests.add(interest);
+                                } else {
+                                  selectedInterests.remove(interest);
+                                }
+                              });
+                            },
+                          );
+                        },
+                      ).toList(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ElevatedButton(
+                onPressed: isButtonEnabled
+                    ? () {
+                        Modular.to.pushNamed('/home/');
+                      }
+                    : null,
+                child: const Text('Continue'),
               ),
             ),
           ],

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:localization/localization.dart';
+import 'package:smart_tour/src/feature/home/view/page/selected_screen.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({Key? key}) : super(key: key);
@@ -12,6 +13,10 @@ class AppWidget extends StatelessWidget {
     LocalJsonLocalization.delegate.directories = ['lib/assets/i18n'];
 
     return MaterialApp.router(
+      theme: ThemeData(
+        fontFamily: 'Tiro Tamil',
+        primaryColor: const Color(0xFF0096C7),
+      ),
       debugShowCheckedModeBanner: false,
       scrollBehavior: AppScrollBehavior(),
       title: 'app_name'.i18n(),
