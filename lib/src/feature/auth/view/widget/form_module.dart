@@ -1,7 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../page/form_screen.dart';
-import '../../home_module.dart';
+import '../../../home/home_module.dart';
 
 class FormModule extends Module {
   @override

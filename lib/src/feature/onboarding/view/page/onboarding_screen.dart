@@ -127,7 +127,7 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
                   _currentPage != 2
                       ? TextButton(
                           onPressed: () {
-                            Modular.to.pushNamed('/form/');
+                            Modular.to.pushNamed('/auth/');
                           },
                           child: Text(
                             'Skip'.i18n(),
@@ -144,7 +144,7 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
                             duration: const Duration(milliseconds: 300),
                             curve: Curves.easeInOut);
                       } else {
-                        Modular.to.pushNamed('/form/');
+                        Modular.to.pushNamed('/auth/');
                       }
                     },
                     child: Text(
