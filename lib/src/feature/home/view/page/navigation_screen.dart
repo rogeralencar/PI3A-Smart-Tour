@@ -36,29 +36,44 @@ class NavigationState extends State<NavigationScreen> {
         data: Theme.of(context).copyWith(
           canvasColor: const Color(0xFF0096C7),
         ),
-        child: BottomNavigationBar(
-          selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.white.withOpacity(0.5),
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
+        child: Container(
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(30), topLeft: Radius.circular(30)),
+            boxShadow: [
+              BoxShadow(color: Colors.black38, spreadRadius: 0, blurRadius: 10),
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(30.0),
+              topRight: Radius.circular(30.0),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.star),
-              label: 'Meus Interesses',
+            child: BottomNavigationBar(
+              selectedItemColor: Colors.white,
+              unselectedItemColor: Colors.white.withOpacity(0.5),
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home),
+                  label: 'Home',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.star),
+                  label: 'Meus Interesses',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.rate_review),
+                  label: 'Avaliações',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.person),
+                  label: 'Perfil',
+                ),
+              ],
+              currentIndex: _selectedIndex,
+              onTap: _onItemTapped,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.rate_review),
-              label: 'Avaliações',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Perfil',
-            ),
-          ],
-          currentIndex: _selectedIndex,
-          onTap: _onItemTapped,
+          ),
         ),
       ),
     );

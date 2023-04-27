@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -132,20 +131,14 @@ class LoginScreenState extends State<LoginScreen> {
                           ),
                           const SizedBox(height: 8),
                           TextButton(
-                            onPressed: () {
-                              Fluttertoast.showToast(
-                                msg:
-                                    'Função de recuperação de senha ainda não implementada',
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.CENTER,
-                              );
-                            },
+                            onPressed: () {},
                             style: const ButtonStyle(
                                 alignment: Alignment.centerRight),
                             child: const Text(
-                              'Forgot Password?',
+                              'Forgot Password ?',
                               style: TextStyle(
-                                color: Color(0xFF03045E),
+                                color: Colors.white,
+                                fontSize: 16,
                               ),
                             ),
                           ),
@@ -168,32 +161,46 @@ class LoginScreenState extends State<LoginScreen> {
                       ),
                       child: const Text(
                         "LOG IN",
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 180),
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          const TextSpan(
-                            text: 'Don\'t have an account? ',
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'Don\'t have an account ? ',
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            Modular.to.pushNamed('/signup');
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.orange.shade700,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 15,
+                              vertical: 4,
+                            ),
+                            elevation: 20,
+                          ),
+                          child: const Text(
+                            "SIGN UP",
                             style: TextStyle(
-                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                          TextSpan(
-                            text: 'Sign Up',
-                            style: TextStyle(
-                              color: Colors.orange.shade700,
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Modular.to.pushNamed('/signup/');
-                              },
-                          ),
-                        ],
-                      ),
-                    )
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),

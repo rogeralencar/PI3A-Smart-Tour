@@ -23,62 +23,43 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFF0096c7),
-              Color(0xFF03045e),
-            ],
-          ),
+          color: Colors.white,
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            const SizedBox(height: 40),
+            const SizedBox(height: 60),
             const Text(
               'Smart Tour',
               style: TextStyle(
                   fontSize: 40,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white),
+                  color: Color(0xFF0096C7)),
             ),
-            const SizedBox(height: 20),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  const Text(
-                    'What is the destination of the trip?',
-                    style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
-                  const SizedBox(height: 20),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Search',
-                        filled: true,
-                        fillColor: Colors.white.withOpacity(0.5),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  const Text(
-                    'Suggestions',
-                    style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
-                ],
-              ),
+            const SizedBox(height: 40),
+            Column(
+              children: [
+                const Text(
+                  'What is the destination of the trip?',
+                  style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF0096C7)),
+                ),
+                const SizedBox(height: 40),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: const AutocompletePlaces(),
+                ),
+                const SizedBox(height: 40),
+                const Text(
+                  'Suggestions',
+                  style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF0096C7)),
+                ),
+              ],
             ),
             Expanded(
               child: GridView.count(
@@ -104,6 +85,65 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+    );
+  }
+}
+
+@immutable
+class User {
+  const User({
+    required this.email,
+    required this.name,
+  });
+
+  final String email;
+  final String name;
+
+  @override
+  String toString() {
+    return '$name, $email';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (other.runtimeType != runtimeType) {
+      return false;
+    }
+    return other is User && other.name == name && other.email == email;
+  }
+
+  @override
+  int get hashCode => Object.hash(email, name);
+}
+
+class AutocompletePlaces extends StatelessWidget {
+  const AutocompletePlaces({super.key});
+
+  static const List<User> _userOptions = <User>[
+    User(name: 'Alice', email: 'alice@example.com'),
+    User(name: 'Bob', email: 'bob@example.com'),
+    User(name: 'Charlie', email: 'charlie123@gmail.com'),
+  ];
+
+  static String _displayStringForOption(User option) => option.name;
+
+  @override
+  Widget build(BuildContext context) {
+    return Autocomplete<User>(
+      displayStringForOption: _displayStringForOption,
+      optionsBuilder: (TextEditingValue textEditingValue) {
+        if (textEditingValue.text == '') {
+          return const Iterable<User>.empty();
+        }
+        return _userOptions.where((User option) {
+          return option
+              .toString()
+              .contains(textEditingValue.text.toLowerCase());
+        });
+      },
+      onSelected: (User selection) {
+        debugPrint('You just selected ${_displayStringForOption(selection)}');
+      },
     );
   }
 }

@@ -72,14 +72,7 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFF0096c7),
-              Color(0xFF03045e),
-            ],
-          ),
+          color: Color(0xFF0096C7),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -109,6 +102,13 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.orange.shade700,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      elevation: 20,
+                    ),
                     onPressed: () {
                       if (_currentPage > 0) {
                         _pageController.previousPage(
@@ -119,25 +119,40 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
                     child: Text(
                       'Back'.i18n(),
                       style: const TextStyle(
-                        fontSize: 18,
+                        fontSize: 22,
                         color: Colors.white,
                       ),
                     ),
                   ),
                   _currentPage != 2
-                      ? TextButton(
+                      ? ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.orange.shade700,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            elevation: 20,
+                          ),
                           onPressed: () {
                             Modular.to.pushNamed('/auth/');
                           },
                           child: Text(
                             'Skip'.i18n(),
                             style: const TextStyle(
+                              fontSize: 22,
                               color: Colors.white,
                             ),
                           ),
                         )
                       : const Text(''),
                   ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.orange.shade700,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      elevation: 20,
+                    ),
                     onPressed: () {
                       if (_currentPage < _pages.length - 1) {
                         _pageController.nextPage(
@@ -152,7 +167,7 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
                           ? 'Done'.i18n()
                           : 'Next'.i18n(),
                       style: const TextStyle(
-                        fontSize: 18,
+                        fontSize: 22,
                         color: Colors.white,
                       ),
                     ),

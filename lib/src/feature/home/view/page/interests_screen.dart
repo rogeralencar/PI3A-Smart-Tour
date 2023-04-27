@@ -31,30 +31,35 @@ class InterestsScreenState extends State<InterestsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Wrap(
-          spacing: 8.0,
-          runSpacing: 8.0,
-          children: List<Widget>.generate(
-            interests.length,
-            (int index) {
-              final interest = interests[index];
-              return ChoiceChip(
-                label: Text(interest),
-                selected: selectedInterests.contains(interest),
-                onSelected: (bool selected) {
-                  setState(() {
-                    if (selected) {
-                      selectedInterests.add(interest);
-                    } else {
-                      selectedInterests.remove(interest);
-                    }
-                  });
-                },
-              );
-            },
-          ).toList(),
+      body: Container(
+        decoration: const BoxDecoration(
+          color: Color(0xFF0096C7),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Wrap(
+            spacing: 8.0,
+            runSpacing: 8.0,
+            children: List<Widget>.generate(
+              interests.length,
+              (int index) {
+                final interest = interests[index];
+                return ChoiceChip(
+                  label: Text(interest),
+                  selected: selectedInterests.contains(interest),
+                  onSelected: (bool selected) {
+                    setState(() {
+                      if (selected) {
+                        selectedInterests.add(interest);
+                      } else {
+                        selectedInterests.remove(interest);
+                      }
+                    });
+                  },
+                );
+              },
+            ).toList(),
+          ),
         ),
       ),
     );

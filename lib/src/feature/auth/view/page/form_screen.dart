@@ -22,8 +22,6 @@ class FormScreenState extends State<FormScreen> {
     'Churches',
     'Climbing',
     'Coral reefs',
-    'Cuisine',
-    'Cultural heritage',
     'Culture',
     'Dance',
     'Ecotourism',
@@ -31,7 +29,6 @@ class FormScreenState extends State<FormScreen> {
     'Family vacations',
     'Festivals',
     'Forests',
-    'Gastronomic travel',
     'Gastronomy',
     'Golf',
     'Helicopter tours',
@@ -40,8 +37,8 @@ class FormScreenState extends State<FormScreen> {
     'Hiking',
     'Islands',
     'Kitesurfing',
+    'Local experiences',
     'Luxury',
-    'Luxury tourism',
     'Markets',
     'Mountain',
     'Museums',
@@ -50,7 +47,6 @@ class FormScreenState extends State<FormScreen> {
     'Nightlife',
     'National parks',
     'Ocean',
-    'Photographic safaris',
     'Photography',
     'Relaxation',
     'Religious tourism',
@@ -73,14 +69,8 @@ class FormScreenState extends State<FormScreen> {
     'Villages',
     'Volcanoes',
     'Water parks',
-    'Whale watching',
     'Wildlife',
-    'Wildlife refuges',
     'Wine tasting',
-    'Local experiences',
-    'Adventure tourism',
-    'Luxury travel',
-    'Cultural life'
   ];
   List<String> selectedInterests = [];
 
@@ -91,14 +81,7 @@ class FormScreenState extends State<FormScreen> {
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFF0096c7),
-              Color(0xFF03045e),
-            ],
-          ),
+          color: Color(0xFF0096C7),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -125,8 +108,17 @@ class FormScreenState extends State<FormScreen> {
                         (int index) {
                           final interest = interests[index];
                           return ChoiceChip(
-                            label: Text(interest),
                             selected: selectedInterests.contains(interest),
+                            label: Text(
+                              interest,
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: selectedInterests.contains(interest)
+                                    ? Colors.white
+                                    : Colors.black,
+                              ),
+                            ),
+                            selectedColor: Colors.orange.shade700,
                             onSelected: (bool selected) {
                               setState(() {
                                 if (selected) {
@@ -152,7 +144,24 @@ class FormScreenState extends State<FormScreen> {
                         Modular.to.pushNamed('/home/');
                       }
                     : null,
-                child: const Text('Continue'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.orange.shade700,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 30,
+                    vertical: 6,
+                  ),
+                  elevation: 20,
+                ),
+                child: const Text(
+                  'Continue',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 22,
+                  ),
+                ),
               ),
             ),
           ],
