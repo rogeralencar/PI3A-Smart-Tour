@@ -4,9 +4,12 @@ import 'home_screen.dart';
 import 'profile_screen.dart';
 import 'rating_screen.dart';
 import 'interests_screen.dart';
+import '../../../auth/repository/user_data.dart';
 
 class NavigationScreen extends StatefulWidget {
-  const NavigationScreen({super.key});
+  final User user;
+
+  const NavigationScreen({super.key, required this.user});
 
   @override
   NavigationState createState() => NavigationState();
@@ -15,12 +18,18 @@ class NavigationScreen extends StatefulWidget {
 class NavigationState extends State<NavigationScreen> {
   int _selectedIndex = 0;
 
-  static final List<Widget> _widgetOptions = <Widget>[
-    const HomeScreen(),
-    const InterestsScreen(),
-    const RatingScreen(),
-    const ProfileScreen(),
-  ];
+  late List<Widget> _widgetOptions;
+
+  @override
+  void initState() {
+    super.initState();
+    _widgetOptions = <Widget>[
+      HomeScreen(user: widget.user),
+      const InterestsScreen(),
+      const RatingScreen(),
+      const ProfileScreen(),
+    ];
+  }
 
   void _onItemTapped(int index) {
     setState(() {

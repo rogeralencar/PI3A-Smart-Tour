@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import '../../repository/user_data.dart';
+
 class FormScreen extends StatefulWidget {
-  const FormScreen({super.key});
+  final User user;
+  const FormScreen({
+    super.key,
+    required this.user,
+  });
 
   @override
   State<FormScreen> createState() => FormScreenState();
@@ -141,7 +147,8 @@ class FormScreenState extends State<FormScreen> {
               child: ElevatedButton(
                 onPressed: isButtonEnabled
                     ? () {
-                        Modular.to.pushNamed('/home/');
+                        widget.user.interests = selectedInterests;
+                        Modular.to.pushNamed('/home/', arguments: widget.user);
                       }
                     : null,
                 style: ElevatedButton.styleFrom(

@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../repository/user_data.dart';
+import 'form_screen.dart';
 
 class SignupScreen extends StatefulWidget {
-  const SignupScreen({super.key});
+  const SignupScreen({Key? key}) : super(key: key);
 
   @override
   SignupScreenState createState() => SignupScreenState();
@@ -43,8 +44,13 @@ class SignupScreenState extends State<SignupScreen> {
         age: int.parse(_ageController.text),
         email: _emailController.text,
         password: _passwordController.text,
+        interests: [],
       );
-      Modular.to.pushNamed('/form/');
+      Modular.to.push(
+        MaterialPageRoute(
+          builder: (_) => FormScreen(user: user),
+        ),
+      );
     }
   }
 

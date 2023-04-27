@@ -8,6 +8,9 @@ class HomeModule extends Module {
 
   @override
   List<ModularRoute> get routes => [
-        ChildRoute('/', child: (_, __) => const NavigationScreen()),
+        ChildRoute('/',
+            child: (_, args) => NavigationScreen(
+                  user: args.data,
+                )),
       ];
 }

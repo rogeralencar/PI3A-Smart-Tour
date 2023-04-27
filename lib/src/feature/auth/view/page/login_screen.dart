@@ -1,6 +1,6 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:smart_tour/src/feature/auth/repository/user_data.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -17,7 +17,16 @@ class LoginScreenState extends State<LoginScreen> {
   void _login() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      Modular.to.pushNamed('/home/');
+      Modular.to.pushNamed(
+        '/home/',
+        arguments: User(
+          name: '',
+          age: 0,
+          email: _email,
+          password: _password,
+          interests: [],
+        ),
+      );
     }
   }
 
