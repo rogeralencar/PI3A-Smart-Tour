@@ -3,7 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:localization/localization.dart';
 
-import 'onboarding_details.dart';
+import '../../../../common/onboarding_details.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({Key? key}) : super(key: key);
@@ -28,18 +28,44 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
   final PageController _pageController = PageController(initialPage: 0);
   final List<Widget> _pages = [
     OnBoardingDetails(
-        title: 'Onboard_title1'.i18n(),
-        subtitle: 'Onboard_sub_title1'.i18n(),
-        image: Image.asset('lib/assets/images/onboarding1.png')),
+      title: 'Onboard_title1'.i18n(),
+      subtitle: 'Onboard_sub_title1'.i18n(),
+      imagePath: 'lib/assets/images/onboarding1.gif',
+      isTitle: true,
+    ),
     OnBoardingDetails(
-        title: 'Onboard_title2'.i18n(),
-        subtitle: 'Onboard_sub_title2'.i18n(),
-        image: Image.asset('lib/assets/images/onboarding2.jpeg')),
+      title: 'Onboard_title2'.i18n(),
+      subtitle: 'Onboard_sub_title2'.i18n(),
+      imagePath: 'lib/assets/images/onboarding2.gif',
+      isTitle: false,
+    ),
     OnBoardingDetails(
-        title: 'Onboard_title3'.i18n(),
-        subtitle: 'Onboard_sub_title3'.i18n(),
-        image: Image.asset('lib/assets/images/onboarding3.png')),
+      title: 'Onboard_title3'.i18n(),
+      subtitle: 'Onboard_sub_title3'.i18n(),
+      imagePath: 'lib/assets/images/onboarding3.gif',
+      isTitle: false,
+    ),
   ];
+
+  List<Widget> _buildPageIndicator() {
+    List<Widget> list = [];
+    for (int i = 0; i < _pages.length; i++) {
+      list.add(i == _currentPage ? _indicator(true) : _indicator(false));
+    }
+    return list;
+  }
+
+  Widget _indicator(bool isActive) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 8.0),
+      height: 8.0,
+      width: isActive ? 16.0 : 10.0,
+      decoration: BoxDecoration(
+        color: isActive ? Colors.orange : Colors.orange.withOpacity(0.5),
+        borderRadius: BorderRadius.circular(12),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,12 +73,12 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              Color.fromARGB(255, 162, 241, 255),
-              Color.fromARGB(255, 20, 84, 109),
-            ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFF0096c7),
+              Color(0xFF03045e),
+            ],
           ),
         ),
         child: Column(
@@ -72,6 +98,11 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
                 },
               ),
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: _buildPageIndicator(),
+            ),
+            const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Row(
@@ -96,7 +127,7 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
                   _currentPage != 2
                       ? TextButton(
                           onPressed: () {
-                            Modular.to.pushNamed('/form');
+                            Modular.to.pushNamed('/auth/');
                           },
                           child: Text(
                             'Skip'.i18n(),
@@ -113,7 +144,7 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
                             duration: const Duration(milliseconds: 300),
                             curve: Curves.easeInOut);
                       } else {
-                        Modular.to.pushNamed('/form');
+                        Modular.to.pushNamed('/auth/');
                       }
                     },
                     child: Text(

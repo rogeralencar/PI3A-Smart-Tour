@@ -12,6 +12,10 @@ class AppWidget extends StatelessWidget {
     LocalJsonLocalization.delegate.directories = ['lib/assets/i18n'];
 
     return MaterialApp.router(
+      theme: ThemeData(
+        fontFamily: 'Tiro Tamil',
+        primaryColor: const Color(0xFF0096C7),
+      ),
       debugShowCheckedModeBanner: false,
       scrollBehavior: AppScrollBehavior(),
       title: 'app_name'.i18n(),
@@ -31,7 +35,6 @@ class AppWidget extends StatelessWidget {
   }
 }
 
-// Configure App Scroll with mouse and touch (Mobile and Desktop)
 class AppScrollBehavior extends MaterialScrollBehavior {
   @override
   Set<PointerDeviceKind> get dragDevices => {
