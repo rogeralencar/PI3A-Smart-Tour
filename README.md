@@ -26,7 +26,7 @@ Smart Tour
 
 # 📁 Access the Project
 
-**Is found in Github: "https://github.com/GuiQueirozRibeiro/App_Loja_Virtual"**
+**Is found in Github: "https://github.com/rogeralencar/PIA3-Smart-Tour"**
 
 # 📝 Requirements
 
