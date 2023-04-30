@@ -26,7 +26,7 @@ Smart Tour
 
 # 📁 Access the Project
 
-**Is found in Github: "https://github.com/rogeralencar/PIA3-Smart-Tour"**
+**Is found in Github: "https://github.com/rogeralencar/PI3A-Smart-Tour"**
 
 # 📝 Requirements
 
