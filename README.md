@@ -63,7 +63,7 @@ flutter run "lib/src/main.dart"
 
 # 🗎 Article 
 
-- ![Article](file:///C:/Users/Eduardo/Downloads/SmartTour___PI3A.pdf)
+- [Article](file:///C:/Users/Eduardo/Downloads/SmartTour___PI3A.pdf)
 
 # 👨‍💻 Authors
 
