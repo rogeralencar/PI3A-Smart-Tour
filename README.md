@@ -9,7 +9,7 @@ Smart Tour
 
 # 🗎 Article 
 
- - [Overleaf Article](https://www.overleaf.com/project/6428a4b9af8eba9be78890d2)
+ - [Overleaf Article](https://www.overleaf.com/read/bbjxqqfmwwxw)
 
 
 # Index
