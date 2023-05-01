@@ -1,8 +1,11 @@
 Smart Tour
-==========
+====
 ## A Flutter Project
 
-![](https://www.saopaulo.sp.gov.br/wp-content/uploads/2020/09/turismo.png)
+<p float="middle">
+  <img src="lib/assets/images/onboarding2.gif" width="32%" /><img src="lib/assets/images/splash.png" width="32%" /><img src="lib/assets/images/onboarding3.gif" width="32%" />
+</p>
+
 
 # Index
 
