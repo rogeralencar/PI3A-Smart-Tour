@@ -7,6 +7,11 @@ Smart Tour
 </p>
 
 
+# 🗎 Article 
+
+ - [Overleaf Article](https://www.overleaf.com/project/6428a4b9af8eba9be78890d2)
+
+
 # Index
 
 * [Index](#index)
@@ -60,10 +65,6 @@ Smart Tour
 ```console
 flutter run "lib/src/main.dart"
 ```
-
-# 🗎 Article 
-
- - [Overleaf Article](https://www.overleaf.com/project/6428a4b9af8eba9be78890d2)
 
 # 👨‍💻 Authors
 
