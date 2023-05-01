@@ -61,6 +61,10 @@ Smart Tour
 flutter run "lib/src/main.dart"
 ```
 
+# 🗎 Article 
+
+- ![Article](file:///C:/Users/Eduardo/Downloads/SmartTour___PI3A.pdf)
+
 # 👨‍💻 Authors
 
 | [<img src="https://avatars.githubusercontent.com/u/70274921?s=400&u=c1688d6fcd13223bfe1093c6d16b3b6b646545fe&v=4" width=115><br><sub>Guilherme Queiroz Ribeiro</sub>](https://github.com/Gui1111RIbeiro) | [<img src="https://avatars.githubusercontent.com/u/51916539?v=4" width=115><br><sub>Roger Alencar</sub>](https://github.com/rogeralencar) | [<img src="https://avatars.githubusercontent.com/u/79982195?v=4" width=115><br><sub>Amanda Anchieta</sub>](https://github.com/amandaxva) | [<img src="https://avatars.githubusercontent.com/u/62016520?v=4" width=115><br><sub>Eduardo Alvim</sub>](https://github.com/dudualvim)
