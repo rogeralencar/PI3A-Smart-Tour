@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:localization/localization.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -7,7 +8,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Perfil'),
+        title: Text('profile_title'.i18n()),
         centerTitle: true,
       ),
       body: Column(
@@ -18,27 +19,27 @@ class ProfileScreen extends StatelessWidget {
             backgroundImage: AssetImage('lib/assets/images/user.png'),
           ),
           const SizedBox(height: 10),
-          const Text(
-            'Nome do Usuário',
-            style: TextStyle(
+          Text(
+            'user_name'.i18n(),
+            style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(height: 10),
-          const Text(
-            'País de Origem: Brasil',
-            style: TextStyle(fontSize: 16),
+          Text(
+            'contry_origin'.i18n(),
+            style: const TextStyle(fontSize: 16),
           ),
           const SizedBox(height: 10),
-          const Text(
-            'Idiomas Falados: Português, Inglês',
-            style: TextStyle(fontSize: 16),
+          Text(
+            'idions'.i18n(),
+            style: const TextStyle(fontSize: 16),
           ),
           const SizedBox(height: 20),
-          const Text(
-            'Interesses de Viagem',
-            style: TextStyle(
+          Text(
+            'trip_interests'.i18n(),
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
@@ -48,27 +49,27 @@ class ProfileScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Column(
-                children: const [
-                  Icon(Icons.beach_access, size: 50),
-                  Text('Praia'),
+                children: [
+                  const Icon(Icons.beach_access, size: 50),
+                  Text('beaches'.i18n()),
                 ],
               ),
               Column(
-                children: const [
-                  Icon(Icons.attractions, size: 50),
-                  Text('Aventura'),
+                children: [
+                  const Icon(Icons.attractions, size: 50),
+                  Text('adventure'.i18n()),
                 ],
               ),
               Column(
-                children: const [
-                  Icon(Icons.local_activity, size: 50),
-                  Text('Cultura'),
+                children: [
+                  const Icon(Icons.local_activity, size: 50),
+                  Text('culture'.i18n()),
                 ],
               ),
               Column(
-                children: const [
-                  Icon(Icons.local_dining, size: 50),
-                  Text('Gastronomia'),
+                children: [
+                  const Icon(Icons.local_dining, size: 50),
+                  Text('gastronomy'.i18n()),
                 ],
               ),
             ],
@@ -85,8 +86,8 @@ class ProfileScreen extends StatelessWidget {
                       backgroundImage:
                           AssetImage('lib/assets/images/travel.jpg'),
                     ),
-                    title: Text('Viagem ${index + 1}'),
-                    subtitle: const Text('Data: 01/01/2023'),
+                    title: Text('travel ${index + 1}'),
+                    subtitle: Text('date'.i18n()),
                     trailing: const Icon(Icons.arrow_forward),
                   ),
                 );

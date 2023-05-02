@@ -1,19 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:localization/localization.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class ForgotPassword extends StatefulWidget {
+  const ForgotPassword({Key? key}) : super(key: key);
 
   @override
-  LoginScreenState createState() => LoginScreenState();
+  ForgotPasswordState createState() => ForgotPasswordState();
 }
 
-class LoginScreenState extends State<LoginScreen> {
-  late String _email;
+class ForgotPasswordState extends State<ForgotPassword> {
+  final _emailController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   Future<void> _submit() async {
+    final isValid = _formKey.currentState?.validate() ?? false;
+
+    if (!isValid) {
+      return;
+    }
     Modular.to.pop();
+  }
+
+  bool isValidEmail(String email) {
+    RegExp emailRegExp = RegExp(
+        r'^[a-zA-Z0-9.!#$%&*+\=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$');
+    return emailRegExp.hasMatch(email);
   }
 
   @override
@@ -21,7 +33,7 @@ class LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-          color: Color(0xFF35034F),
+          color: Color(0xFF0096C7),
         ),
         child: Center(
           child: SingleChildScrollView(
@@ -35,12 +47,12 @@ class LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Image.asset(
-                      'lib/assets/images/SNAP_LOGO.PNG.png',
+                      'lib/assets/images/logo.png',
                       height: 170,
                     ),
-                    const Text(
-                      'Reset Password',
-                      style: TextStyle(
+                    Text(
+                      'reset_password'.i18n(),
+                      style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
@@ -64,7 +76,7 @@ class LoginScreenState extends State<LoginScreen> {
                                     const EdgeInsets.symmetric(horizontal: 10),
                                 filled: true,
                                 fillColor: Colors.white,
-                                labelText: '\t\t\t\t\t\tEnter your E-mail',
+                                labelText: 'email_text_field'.i18n(),
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.never,
                                 border: OutlineInputBorder(
@@ -78,13 +90,15 @@ class LoginScreenState extends State<LoginScreen> {
                               ),
                               maxLines: 1,
                               keyboardType: TextInputType.emailAddress,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Por favor, insira o e-mail';
+                              controller: _emailController,
+                              validator: (email) {
+                                if (email!.isEmpty) {
+                                  return 'email_required'.i18n();
+                                } else if (!isValidEmail(email)) {
+                                  return 'email_invalid'.i18n();
                                 }
                                 return null;
                               },
-                              onSaved: (email) => _email = email ?? '',
                             ),
                           ),
                         ],
@@ -94,7 +108,7 @@ class LoginScreenState extends State<LoginScreen> {
                     ElevatedButton(
                       onPressed: _submit,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFF9626C),
+                        backgroundColor: Colors.orange.shade700,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -104,9 +118,9 @@ class LoginScreenState extends State<LoginScreen> {
                         ),
                         elevation: 20,
                       ),
-                      child: const Text(
-                        "ENVIAR",
-                        style: TextStyle(
+                      child: Text(
+                        "send".i18n(),
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),

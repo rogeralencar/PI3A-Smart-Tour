@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:localization/localization.dart';
 
 class RatingScreen extends StatefulWidget {
   const RatingScreen({super.key});
@@ -34,9 +35,9 @@ class RatingScreenState extends State<RatingScreen> {
       body: Column(
         children: [
           const SizedBox(height: 60),
-          const Text(
-            'Viagens Mais Bem Avaliadas',
-            style: TextStyle(
+          Text(
+            'rating_title'.i18n(),
+            style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
@@ -54,7 +55,7 @@ class RatingScreenState extends State<RatingScreen> {
                           AssetImage('lib/assets/images/travel.jpg'),
                     ),
                     title: Text(_trips[index]['destination']),
-                    subtitle: Text('Nota: ${_trips[index]['rating']}'),
+                    subtitle: Text('Note: ${_trips[index]['rating']}'),
                     trailing: const Icon(Icons.arrow_forward),
                   ),
                 );
@@ -62,9 +63,9 @@ class RatingScreenState extends State<RatingScreen> {
             ),
           ),
           const SizedBox(height: 20),
-          const Text(
-            'Suas Avaliações',
-            style: TextStyle(
+          Text(
+            'your_rating'.i18n(),
+            style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
@@ -82,7 +83,7 @@ class RatingScreenState extends State<RatingScreen> {
                           AssetImage('lib/assets/images/travel.jpg'),
                     ),
                     title: Text(_trips[index]['destination']),
-                    subtitle: Text('Nota: ${_trips[index]['rating']}'),
+                    subtitle: Text('Note: ${_trips[index]['rating']}'),
                     trailing: const Icon(Icons.arrow_forward),
                   ),
                 );

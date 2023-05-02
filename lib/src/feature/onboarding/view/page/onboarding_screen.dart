@@ -28,20 +28,20 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
   final PageController _pageController = PageController(initialPage: 0);
   final List<Widget> _pages = [
     OnBoardingDetails(
-      title: 'Onboard_title1'.i18n(),
-      subtitle: 'Onboard_sub_title1'.i18n(),
+      title: 'onboard_title1'.i18n(),
+      subtitle: 'onboard_sub_title1'.i18n(),
       imagePath: 'lib/assets/images/onboarding1.gif',
       isTitle: true,
     ),
     OnBoardingDetails(
-      title: 'Onboard_title2'.i18n(),
-      subtitle: 'Onboard_sub_title2'.i18n(),
+      title: 'onboard_title2'.i18n(),
+      subtitle: 'onboard_sub_title2'.i18n(),
       imagePath: 'lib/assets/images/onboarding2.gif',
       isTitle: false,
     ),
     OnBoardingDetails(
-      title: 'Onboard_title3'.i18n(),
-      subtitle: 'Onboard_sub_title3'.i18n(),
+      title: 'onboard_title3'.i18n(),
+      subtitle: 'onboard_sub_title3'.i18n(),
       imagePath: 'lib/assets/images/onboarding3.gif',
       isTitle: false,
     ),
@@ -117,7 +117,7 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
                       }
                     },
                     child: Text(
-                      'Back'.i18n(),
+                      'back'.i18n(),
                       style: const TextStyle(
                         fontSize: 22,
                         color: Colors.white,
@@ -137,7 +137,7 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
                             Modular.to.pushNamed('/auth/');
                           },
                           child: Text(
-                            'Skip'.i18n(),
+                            'skip'.i18n(),
                             style: const TextStyle(
                               fontSize: 22,
                               color: Colors.white,
@@ -164,8 +164,8 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
                     },
                     child: Text(
                       _currentPage == _pages.length - 1
-                          ? 'Done'.i18n()
-                          : 'Next'.i18n(),
+                          ? 'done'.i18n()
+                          : 'next'.i18n(),
                       style: const TextStyle(
                         fontSize: 22,
                         color: Colors.white,

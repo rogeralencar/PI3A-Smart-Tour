@@ -28,9 +28,9 @@ class Places {
 }
 
 class AutocompletePlaces extends StatelessWidget {
-  final List user_interests;
+  final List userInterests;
 
-  const AutocompletePlaces({super.key, required this.user_interests});
+  const AutocompletePlaces({super.key, required this.userInterests});
 
   static const List<Places> _userOptions = <Places>[
     Places(name: 'São Paulo, SP', location: 'São Paulo'),
@@ -172,7 +172,7 @@ class AutocompletePlaces extends StatelessWidget {
           },
           onSelected: (Places selection) {
             debugPrint(_displayStringForOption(selection));
-            debugPrint(user_interests.toString());
+            debugPrint(userInterests.toString());
           },
         ),
       ],

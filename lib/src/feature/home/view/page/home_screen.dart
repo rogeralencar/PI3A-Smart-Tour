@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:localization/localization.dart';
 
 import '../widget/places_autocomplete.dart';
 import '../../../auth/repository/user_data.dart';
@@ -34,9 +35,9 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             const SizedBox(height: 60),
-            const Text(
-              'Smart Tour',
-              style: TextStyle(
+            Text(
+              'app_name'.i18n(),
+              style: const TextStyle(
                   fontSize: 40,
                   fontWeight: FontWeight.bold,
                   color: Color(0xFF0096C7)),
@@ -44,9 +45,9 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 40),
             Column(
               children: [
-                const Text(
-                  'What is the destination of the trip?',
-                  style: TextStyle(
+                Text(
+                  'home_question'.i18n(),
+                  style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF0096C7)),
@@ -55,13 +56,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: AutocompletePlaces(
-                    user_interests: widget.user.interests,
+                    userInterests: widget.user.interests,
                   ),
                 ),
                 const SizedBox(height: 40),
-                const Text(
-                  'Suggestions',
-                  style: TextStyle(
+                Text(
+                  'suggestions'.i18n(),
+                  style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF0096C7)),

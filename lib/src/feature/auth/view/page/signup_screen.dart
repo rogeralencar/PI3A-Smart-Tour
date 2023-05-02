@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:localization/localization.dart';
 
 import '../../repository/user_data.dart';
 import 'form_screen.dart';
@@ -74,9 +75,9 @@ class SignupScreenState extends State<SignupScreen> {
                       'lib/assets/images/logo.png',
                       height: 170,
                     ),
-                    const Text(
-                      'Create Account',
-                      style: TextStyle(
+                    Text(
+                      'sign_up_account'.i18n(),
+                      style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
@@ -100,7 +101,7 @@ class SignupScreenState extends State<SignupScreen> {
                                     const EdgeInsets.symmetric(horizontal: 10),
                                 filled: true,
                                 fillColor: Colors.white,
-                                labelText: '\t\t\t\t\t\tEnter your name',
+                                labelText: 'name_text_field'.i18n(),
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.never,
                                 border: OutlineInputBorder(
@@ -115,12 +116,12 @@ class SignupScreenState extends State<SignupScreen> {
                               maxLines: 1,
                               keyboardType: TextInputType.emailAddress,
                               controller: _nameController,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Por favor, insira seu nome';
+                              validator: (name) {
+                                if (name!.isEmpty) {
+                                  return 'name_required'.i18n();
                                 }
-                                if (value.length < 3) {
-                                  return 'Seu nome deve ter pelo menos 3 caracteres';
+                                if (name.length < 3) {
+                                  return 'name_invalid'.i18n();
                                 }
                                 return null;
                               },
@@ -136,7 +137,7 @@ class SignupScreenState extends State<SignupScreen> {
                               decoration: InputDecoration(
                                 contentPadding:
                                     const EdgeInsets.symmetric(horizontal: 10),
-                                labelText: '\t\t\t\t\t\tEnter your Age',
+                                labelText: 'age_text_field'.i18n(),
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.never,
                                 filled: true,
@@ -150,11 +151,11 @@ class SignupScreenState extends State<SignupScreen> {
                                 ),
                               ),
                               controller: _ageController,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Por favor, insira sua idade';
-                                } else if (!isValidAge(value)) {
-                                  return 'Insira uma idade válida';
+                              validator: (age) {
+                                if (age!.isEmpty) {
+                                  return 'age_required'.i18n();
+                                } else if (!isValidAge(age)) {
+                                  return 'age_invalid'.i18n();
                                 }
                                 return null;
                               },
@@ -172,7 +173,7 @@ class SignupScreenState extends State<SignupScreen> {
                                     const EdgeInsets.symmetric(horizontal: 10),
                                 filled: true,
                                 fillColor: Colors.white,
-                                labelText: '\t\t\t\t\t\tEnter your E-mail',
+                                labelText: 'email_text_field'.i18n(),
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.never,
                                 border: OutlineInputBorder(
@@ -187,11 +188,11 @@ class SignupScreenState extends State<SignupScreen> {
                               maxLines: 1,
                               keyboardType: TextInputType.emailAddress,
                               controller: _emailController,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Por favor, insira o e-mail';
-                                } else if (!isValidEmail(value)) {
-                                  return 'Insira um e-mail válido';
+                              validator: (email) {
+                                if (email!.isEmpty) {
+                                  return 'email_required'.i18n();
+                                } else if (!isValidEmail(email)) {
+                                  return 'email_invalid'.i18n();
                                 }
                                 return null;
                               },
@@ -207,7 +208,7 @@ class SignupScreenState extends State<SignupScreen> {
                               decoration: InputDecoration(
                                 contentPadding:
                                     const EdgeInsets.symmetric(horizontal: 10),
-                                labelText: '\t\t\t\t\t\tEnter Password',
+                                labelText: 'password_text_field'.i18n(),
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.never,
                                 filled: true,
@@ -222,11 +223,11 @@ class SignupScreenState extends State<SignupScreen> {
                               ),
                               obscureText: true,
                               controller: _passwordController,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Por favor, insira a senha';
-                                } else if (!isValidPassword(value)) {
-                                  return 'Insira uma senha válida (mínimo de 8 caracteres com pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial)';
+                              validator: (password) {
+                                if (password!.isEmpty) {
+                                  return 'password_required'.i18n();
+                                } else if (!isValidPassword(password)) {
+                                  return 'password_invalid'.i18n();
                                 }
                                 return null;
                               },
@@ -249,9 +250,9 @@ class SignupScreenState extends State<SignupScreen> {
                         ),
                         elevation: 20,
                       ),
-                      child: const Text(
-                        "SIGN IN",
-                        style: TextStyle(
+                      child: Text(
+                        "sign_up".i18n(),
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -261,9 +262,12 @@ class SignupScreenState extends State<SignupScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text(
-                          'Don\'t have an account ? ',
-                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        Text(
+                          'with_account'.i18n(),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
                         ),
                         ElevatedButton(
                           onPressed: () {
@@ -280,9 +284,9 @@ class SignupScreenState extends State<SignupScreen> {
                             ),
                             elevation: 20,
                           ),
-                          child: const Text(
-                            "LOG IN",
-                            style: TextStyle(
+                          child: Text(
+                            "login".i18n(),
+                            style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
                             ),

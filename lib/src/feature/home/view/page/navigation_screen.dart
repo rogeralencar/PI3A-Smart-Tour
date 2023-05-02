@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:localization/localization.dart';
 
 import 'home_screen.dart';
 import 'profile_screen.dart';
@@ -61,22 +62,22 @@ class NavigationState extends State<NavigationScreen> {
             child: BottomNavigationBar(
               selectedItemColor: Colors.white,
               unselectedItemColor: Colors.white.withOpacity(0.5),
-              items: const <BottomNavigationBarItem>[
+              items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: 'Home',
+                  icon: const Icon(Icons.home),
+                  label: 'home'.i18n(),
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.star),
-                  label: 'Meus Interesses',
+                  icon: const Icon(Icons.star),
+                  label: 'interests'.i18n(),
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.rate_review),
-                  label: 'Avaliações',
+                  icon: const Icon(Icons.rate_review),
+                  label: 'ratings'.i18n(),
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.person),
-                  label: 'Perfil',
+                  icon: const Icon(Icons.person),
+                  label: 'profile'.i18n(),
                 ),
               ],
               currentIndex: _selectedIndex,

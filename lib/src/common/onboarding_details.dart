@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gif/gif.dart';
+import 'package:localization/localization.dart';
 
 class OnBoardingDetails extends StatefulWidget {
   final String title;
@@ -44,9 +45,9 @@ class _OnBoardingDetailsState extends State<OnBoardingDetails>
       children: [
         const SizedBox(height: 50),
         widget.isTitle
-            ? const Text(
-                'Smart Tour',
-                style: TextStyle(
+            ? Text(
+                'app_name'.i18n(),
+                style: const TextStyle(
                   fontSize: 40,
                   color: Colors.white,
                 ),
@@ -79,10 +80,11 @@ class _OnBoardingDetailsState extends State<OnBoardingDetails>
           controller: controller,
           autostart: Autostart.loop,
           duration: const Duration(seconds: 3),
-          placeholder: (context) => const Text(
-            'Loading...',
-            style: TextStyle(
+          placeholder: (context) => Text(
+            'loading'.i18n(),
+            style: const TextStyle(
               color: Colors.white,
+              fontSize: 22,
             ),
           ),
           onFetchCompleted: () {

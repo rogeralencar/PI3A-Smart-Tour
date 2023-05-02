@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:localization/localization.dart';
 import 'package:smart_tour/src/feature/auth/repository/user_data.dart';
+
+import 'forgot_password_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -52,9 +55,9 @@ class LoginScreenState extends State<LoginScreen> {
                       'lib/assets/images/logo.png',
                       height: 170,
                     ),
-                    const Text(
-                      'Login Account',
-                      style: TextStyle(
+                    Text(
+                      'login_title'.i18n(),
+                      style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
@@ -78,7 +81,7 @@ class LoginScreenState extends State<LoginScreen> {
                                     const EdgeInsets.symmetric(horizontal: 10),
                                 filled: true,
                                 fillColor: Colors.white,
-                                labelText: '\t\t\t\t\t\tEnter your E-mail',
+                                labelText: 'email_text_field'.i18n(),
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.never,
                                 border: OutlineInputBorder(
@@ -92,9 +95,9 @@ class LoginScreenState extends State<LoginScreen> {
                               ),
                               maxLines: 1,
                               keyboardType: TextInputType.emailAddress,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Por favor, insira o e-mail';
+                              validator: (email) {
+                                if (email!.isEmpty) {
+                                  return 'email_required'.i18n();
                                 }
                                 return null;
                               },
@@ -113,7 +116,7 @@ class LoginScreenState extends State<LoginScreen> {
                               decoration: InputDecoration(
                                 contentPadding:
                                     const EdgeInsets.symmetric(horizontal: 10),
-                                labelText: '\t\t\t\t\t\tEnter Password',
+                                labelText: 'password_text_field'.i18n(),
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.never,
                                 filled: true,
@@ -127,9 +130,9 @@ class LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                               obscureText: true,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Por favor, insira a senha';
+                              validator: (password) {
+                                if (password!.isEmpty) {
+                                  return 'password_required'.i18n();
                                 }
                                 return null;
                               },
@@ -140,12 +143,18 @@ class LoginScreenState extends State<LoginScreen> {
                           ),
                           const SizedBox(height: 8),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Modular.to.push(
+                                MaterialPageRoute(
+                                  builder: (_) => const ForgotPassword(),
+                                ),
+                              );
+                            },
                             style: const ButtonStyle(
                                 alignment: Alignment.centerRight),
-                            child: const Text(
-                              'Forgot Password ?',
-                              style: TextStyle(
+                            child: Text(
+                              'forgot_password'.i18n(),
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
                               ),
@@ -168,9 +177,9 @@ class LoginScreenState extends State<LoginScreen> {
                         ),
                         elevation: 20,
                       ),
-                      child: const Text(
-                        "LOG IN",
-                        style: TextStyle(
+                      child: Text(
+                        "login".i18n(),
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -180,9 +189,12 @@ class LoginScreenState extends State<LoginScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text(
-                          'Don\'t have an account ? ',
-                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        Text(
+                          'without_account'.i18n(),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
                         ),
                         ElevatedButton(
                           onPressed: () {
@@ -199,9 +211,9 @@ class LoginScreenState extends State<LoginScreen> {
                             ),
                             elevation: 20,
                           ),
-                          child: const Text(
-                            "SIGN UP",
-                            style: TextStyle(
+                          child: Text(
+                            "sign_up".i18n(),
+                            style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
                             ),
