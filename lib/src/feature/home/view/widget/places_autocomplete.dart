@@ -71,7 +71,6 @@ class AutocompletePlaces extends StatelessWidget {
     Places(name: 'Juiz de Fora, MG', location: 'Minas Gerais'),
     Places(name: 'Joinville, SC', location: 'Santa Catarina'),
     Places(name: 'Niterói, RJ', location: 'Rio de Janeiro'),
-    Places(name: 'São João de Meriti, RJ', location: 'Rio de Janeiro'),
     Places(name: 'Ananindeua, PA', location: 'Pará'),
     Places(name: 'Belford Roxo, RJ', location: 'Rio de Janeiro'),
     Places(name: 'Ponta Grossa, PR', location: 'Paraná'),

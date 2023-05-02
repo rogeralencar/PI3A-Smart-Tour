@@ -24,14 +24,12 @@ class SignupScreenState extends State<SignupScreen> {
     return emailRegExp.hasMatch(email);
   }
 
-// Função de validação da senha
   bool isValidPassword(String password) {
     RegExp passwordRegExp =
         RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
     return passwordRegExp.hasMatch(password);
   }
 
-// Função de validação da idade
   bool isValidAge(String age) {
     int? ageValue = int.tryParse(age);
     return ageValue != null && ageValue > 0;

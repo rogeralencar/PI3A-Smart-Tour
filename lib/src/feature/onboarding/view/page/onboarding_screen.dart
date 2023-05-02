@@ -61,7 +61,7 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
       height: 8.0,
       width: isActive ? 16.0 : 10.0,
       decoration: BoxDecoration(
-        color: isActive ? Colors.orange : Colors.orange.withOpacity(0.5),
+        color: isActive ? Colors.orange.shade700 : Colors.white,
         borderRadius: BorderRadius.circular(12),
       ),
     );
