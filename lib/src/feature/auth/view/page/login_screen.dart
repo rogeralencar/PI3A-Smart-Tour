@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:localization/localization.dart';
 import 'package:smart_tour/src/feature/auth/repository/user_data.dart';
+import 'package:http/http.dart' as http;
 
 import 'forgot_password_screen.dart';
 
@@ -17,9 +20,23 @@ class LoginScreenState extends State<LoginScreen> {
   late String _email;
   late String _password;
 
-  void _login() {
+  Future<void> _login() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
+
+      var client = http.Client();
+      try {
+        var response = await client.post(Uri.https('api.com', '/login'),
+            body: {'email': _email, 'password': _password});
+        var decodedResponse =
+            jsonDecode(utf8.decode(response.bodyBytes)) as Map;
+        var uri = Uri.parse(decodedResponse['uri'] as String);
+        final result = await client.get(uri);
+        debugPrint(result.toString());
+      } finally {
+        client.close();
+      }
+
       Modular.to.pushNamed(
         '/home/',
         arguments: User(

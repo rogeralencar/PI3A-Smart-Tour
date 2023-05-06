@@ -21,6 +21,7 @@ dependencies:
   flutter_native_splash: ^2.2.19
   dio: ^5.1.1
   gif: ^2.2.0
+  http: ^0.13.6
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:localization/localization.dart';
+import 'package:http/http.dart' as http;
 
 import '../../repository/user_data.dart';
 import 'form_screen.dart';
@@ -36,7 +39,7 @@ class SignupScreenState extends State<SignupScreen> {
     return ageValue != null && ageValue > 0;
   }
 
-  void _submitForm() {
+  Future<void> _submitForm() async {
     if (_formKey.currentState!.validate()) {
       final user = User(
         name: _nameController.text,
@@ -45,6 +48,19 @@ class SignupScreenState extends State<SignupScreen> {
         password: _passwordController.text,
         interests: [],
       );
+      var client = http.Client();
+      try {
+        var response = await client.post(Uri.https('api.com', '/login'),
+            body: {'email': user.email, 'password': user.password});
+        var decodedResponse =
+            jsonDecode(utf8.decode(response.bodyBytes)) as Map;
+        var uri = Uri.parse(decodedResponse['uri'] as String);
+        final result = await client.get(uri);
+        debugPrint(result.toString());
+      } finally {
+        client.close();
+      }
+
       Modular.to.push(
         MaterialPageRoute(
           builder: (_) => FormScreen(user: user),
