@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:smart_tour/src/feature/auth/service/auth_service.dart';
 
 class AuthRepository {

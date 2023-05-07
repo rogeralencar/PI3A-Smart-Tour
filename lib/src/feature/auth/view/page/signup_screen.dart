@@ -40,16 +40,6 @@ class SignupScreenState extends State<SignupScreen> {
 
   void _submitForm() async {
     if (_formKey.currentState!.validate()) {
-      await _authViewModel.register(
-          _emailController.text,
-          _passwordController.text,
-          _nameController.text,
-          [],
-          int.parse(_ageController.text));
-
-      await _authViewModel.login(
-          _emailController.text, _passwordController.text);
-          
       final user = User(
         name: _nameController.text,
         age: int.parse(_ageController.text),
@@ -57,6 +47,12 @@ class SignupScreenState extends State<SignupScreen> {
         password: _passwordController.text,
         interests: [],
       );
+
+      await _authViewModel.register(
+          user.email, user.password, user.name, [], user.age);
+
+      await _authViewModel.login(user.email, user.password);
+
       Modular.to.push(
         MaterialPageRoute(
           builder: (_) => FormScreen(user: user),
