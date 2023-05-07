@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:localization/localization.dart';
 import 'package:smart_tour/src/feature/auth/repository/user_data.dart';
+import 'package:smart_tour/src/feature/auth/viewmodel/auth_view_model.dart';
 
 import 'forgot_password_screen.dart';
 
@@ -17,9 +18,12 @@ class LoginScreenState extends State<LoginScreen> {
   late String _email;
   late String _password;
 
-  void _login() {
+  final AuthViewModel _authViewModel = AuthViewModel();
+
+  void _login() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
+      await _authViewModel.login(_email, _password);
       Modular.to.pushNamed(
         '/home/',
         arguments: User(

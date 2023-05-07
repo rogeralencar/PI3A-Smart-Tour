@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:localization/localization.dart';
 
 import '../../repository/user_data.dart';
+import '../../viewmodel/auth_view_model.dart';
 import 'form_screen.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -18,6 +19,7 @@ class SignupScreenState extends State<SignupScreen> {
   final _ageController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final AuthViewModel _authViewModel = AuthViewModel();
 
   bool isValidEmail(String email) {
     RegExp emailRegExp = RegExp(
@@ -36,8 +38,18 @@ class SignupScreenState extends State<SignupScreen> {
     return ageValue != null && ageValue > 0;
   }
 
-  void _submitForm() {
+  void _submitForm() async {
     if (_formKey.currentState!.validate()) {
+      await _authViewModel.register(
+          _emailController.text,
+          _passwordController.text,
+          _nameController.text,
+          [],
+          int.parse(_ageController.text));
+
+      await _authViewModel.login(
+          _emailController.text, _passwordController.text);
+          
       final user = User(
         name: _nameController.text,
         age: int.parse(_ageController.text),
