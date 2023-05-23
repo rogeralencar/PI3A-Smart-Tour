@@ -17,11 +17,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_modular: ^5.0.3
   localization: ^2.1.0
-  flutter_launcher_icons: "^0.12.0"
-  flutter_native_splash: ^2.2.19
+  flutter_launcher_icons: "^0.13.1"
   dio: ^5.1.1
   gif: ^2.2.0
-  http: ^0.13.6
+  http: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -29,14 +28,12 @@ dev_dependencies:
 
   flutter_lints: ^2.0.0
 
-flutter_native_splash:
-  image: lib/assets/images/splash.png
-
-flutter_icons:
+flutter_launcher_icons:
   android: true
   ios: true
   image_path: "lib/assets/images/splash.png"
   adaptative_icon_foreground: "lib/assets/images/splash.png"
+  remove_alpha_ios: true
 
 flutter:
 
