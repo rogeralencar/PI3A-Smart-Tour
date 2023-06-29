@@ -5,31 +5,46 @@ import 'package:provider/provider.dart';
 
 import '../../../../common/custom_button.dart';
 import '../../../../common/interests_data.dart';
-import '../../repository/user_model.dart';
-import '../../repository/user_provider.dart';
+import '../../../auth/repository/user_model.dart';
+import '../../../auth/repository/user_provider.dart';
 
-class FormScreen extends StatefulWidget {
-  final User user;
-  const FormScreen({
-    super.key,
-    required this.user,
-  });
+class InterestsSelectionScreen extends StatefulWidget {
+  const InterestsSelectionScreen({super.key});
 
   @override
-  State<FormScreen> createState() => FormScreenState();
+  InterestsSelectionScreenState createState() =>
+      InterestsSelectionScreenState();
 }
 
-class FormScreenState extends State<FormScreen> {
+class InterestsSelectionScreenState extends State<InterestsSelectionScreen> {
+  late UserProvider userProvider;
+  late User? user;
   List<String> selectedInterests = [];
+
+  @override
+  void initState() {
+    super.initState();
+    userProvider = Provider.of<UserProvider>(context, listen: false);
+    user = userProvider.user;
+    if (user != null) {
+      selectedInterests = user!.interests;
+    }
+  }
 
   bool get isButtonEnabled => selectedInterests.length >= 3;
 
   @override
   Widget build(BuildContext context) {
-    UserProvider userProvider = Provider.of(context, listen: false);
     final Size screenSize = MediaQuery.of(context).size;
-
     return Scaffold(
+      appBar: AppBar(
+          title: Text(
+        'form_title'.i18n(),
+        style: TextStyle(
+          fontSize: 24,
+          color: Theme.of(context).colorScheme.tertiary,
+        ),
+      )),
       body: Container(
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.primary,
@@ -37,17 +52,6 @@ class FormScreenState extends State<FormScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(height: 50),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'form_title'.i18n(),
-                style: TextStyle(
-                  fontSize: 24,
-                  color: Theme.of(context).colorScheme.tertiary,
-                ),
-              ),
-            ),
             Expanded(
               child: ListView(
                 children: [
@@ -110,11 +114,11 @@ class FormScreenState extends State<FormScreen> {
               child: CustomButton(
                 isEnabled: isButtonEnabled,
                 onPressed: () {
-                  widget.user.interests = selectedInterests;
-                  userProvider.setUser(widget.user);
-                  Modular.to.navigate('/home/');
+                  user!.interests = selectedInterests;
+                  userProvider.setUser(user!);
+                  Modular.to.pop();
                 },
-                buttonText: 'continue'.i18n(),
+                buttonText: 'save'.i18n(),
                 size: screenSize,
               ),
             ),

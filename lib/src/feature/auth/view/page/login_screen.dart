@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:localization/localization.dart';
-import 'package:smart_tour/src/feature/auth/repository/user_data.dart';
-import 'package:smart_tour/src/feature/auth/viewmodel/auth_view_model.dart';
+import 'package:provider/provider.dart';
 
-import 'forgot_password_screen.dart';
+import '../../repository/user_model.dart';
+import '../../repository/user_provider.dart';
+import '../../viewmodel/auth_view_model.dart';
+import '../../../../common/custom_button.dart';
+import '../../../../common/custom_text_field.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -15,40 +18,86 @@ class LoginScreen extends StatefulWidget {
 
 class LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  late String _email;
-  late String _password;
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  String _email = '';
+  String _password = '';
+  bool _isLoading = false;
 
   final AuthViewModel _authViewModel = AuthViewModel();
 
-  void _login() async {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-      await _authViewModel.login(_email, _password);
-      Modular.to.pushNamed(
-        '/home/',
-        arguments: User(
-          name: '',
-          age: 0,
-          email: _email,
-          password: _password,
-          interests: [],
-        ),
-      );
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  void _showErrorDialog(String msg) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('error_occurred'.i18n()),
+        content: Text(msg),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text('close'.i18n()),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _submit() async {
+    final isValid = _formKey.currentState?.validate() ?? false;
+
+    if (!isValid) {
+      return;
     }
+    setState(() => _isLoading = true);
+
+    _formKey.currentState!.save();
+
+    UserProvider userProvider = Provider.of(context, listen: false);
+
+    try {
+      final user = User(
+        name: 'Username',
+        email: _email,
+        password: _password,
+        interests: [
+          'Adventure',
+          'Art',
+          'Beaches',
+        ],
+      );
+
+      //await _authViewModel.login(_email, _password);
+
+      userProvider.setUser(user);
+      Modular.to.navigate('/home/');
+    } catch (error) {
+      _showErrorDialog('unexpected_error'.i18n());
+    }
+    setState(() => _isLoading = false);
   }
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
-          color: Color(0xFF0096C7),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.primary,
         ),
         child: Center(
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 40,
+              padding: EdgeInsets.symmetric(
+                horizontal: screenSize.width * 0.1,
               ),
               child: SizedBox(
                 width: double.infinity,
@@ -57,18 +106,18 @@ class LoginScreenState extends State<LoginScreen> {
                   children: [
                     Image.asset(
                       'lib/assets/images/logo.png',
-                      height: 170,
+                      height: screenSize.height * 0.2,
                     ),
                     Text(
                       'login_title'.i18n(),
-                      style: const TextStyle(
-                        fontSize: 24,
+                      style: TextStyle(
+                        fontSize: screenSize.width * 0.06,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.tertiary,
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 60),
+                    SizedBox(height: screenSize.height * 0.06),
                     Form(
                       key: _formKey,
                       child: Column(
@@ -79,153 +128,93 @@ class LoginScreenState extends State<LoginScreen> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
                             ),
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                contentPadding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                filled: true,
-                                fillColor: Colors.white,
-                                labelText: 'email_text_field'.i18n(),
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                  borderSide: const BorderSide(
-                                    color: Colors.grey,
-                                    width: 1.0,
-                                  ),
-                                ),
-                                alignLabelWithHint: false,
-                              ),
-                              maxLines: 1,
+                            child: CustomTextField(
+                              text: 'email_field'.i18n(),
+                              controller: _emailController,
                               keyboardType: TextInputType.emailAddress,
-                              validator: (email) {
-                                if (email!.isEmpty) {
+                              textInputAction: TextInputAction.next,
+                              validator: (value) {
+                                if (value!.isEmpty) {
                                   return 'email_required'.i18n();
                                 }
                                 return null;
                               },
-                              onSaved: (value) {
-                                _email = value!;
-                              },
+                              onSaved: (email) => _email = email ?? '',
                             ),
                           ),
-                          const SizedBox(height: 16),
+                          SizedBox(height: screenSize.height * 0.016),
                           Card(
                             elevation: 20,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
                             ),
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                contentPadding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                labelText: 'password_text_field'.i18n(),
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
-                                filled: true,
-                                fillColor: Colors.white,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                  borderSide: const BorderSide(
-                                    color: Colors.grey,
-                                    width: 1.0,
-                                  ),
-                                ),
-                              ),
+                            child: CustomTextField(
+                              text: 'password_field'.i18n(),
+                              controller: _passwordController,
                               obscureText: true,
-                              validator: (password) {
-                                if (password!.isEmpty) {
+                              validator: (value) {
+                                if (value!.isEmpty) {
                                   return 'password_required'.i18n();
                                 }
                                 return null;
                               },
-                              onSaved: (value) {
-                                _password = value!;
+                              onSaved: (password) => _password = password ?? '',
+                              onFieldSubmitted: (_) {
+                                _submit();
                               },
                             ),
                           ),
-                          const SizedBox(height: 8),
+                          SizedBox(height: screenSize.height * 0.008),
                           TextButton(
                             onPressed: () {
-                              Modular.to.push(
-                                MaterialPageRoute(
-                                  builder: (_) => const ForgotPassword(),
-                                ),
-                              );
+                              Modular.to.pushNamed('forgotPassword');
                             },
                             style: const ButtonStyle(
-                                alignment: Alignment.centerRight),
+                              alignment: Alignment.centerRight,
+                            ),
                             child: Text(
                               'forgot_password'.i18n(),
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.tertiary,
+                                fontSize: screenSize.width * 0.04,
                               ),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    const SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: _login,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.orange.shade700,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 60,
-                          vertical: 6,
-                        ),
-                        elevation: 20,
-                      ),
-                      child: Text(
-                        "login".i18n(),
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 180),
+                    SizedBox(height: screenSize.height * 0.04),
+                    _isLoading
+                        ? CircularProgressIndicator(
+                            color: Theme.of(context).colorScheme.outline,
+                          )
+                        : CustomButton(
+                            size: screenSize,
+                            buttonText: 'login'.i18n(),
+                            onPressed: _submit,
+                          ),
+                    SizedBox(height: screenSize.height * 0.12),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           'without_account'.i18n(),
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.tertiary,
+                            fontSize: screenSize.width * 0.04,
                           ),
                         ),
-                        ElevatedButton(
+                        CustomButton(
+                          size: screenSize,
+                          buttonText: 'sign_up'.i18n(),
                           onPressed: () {
-                            Modular.to.pushNamed('/signup');
+                            Modular.to.pushNamed('signup/');
                           },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.orange.shade700,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 15,
-                              vertical: 4,
-                            ),
-                            elevation: 20,
-                          ),
-                          child: Text(
-                            "sign_up".i18n(),
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          isBig: false,
                         ),
                       ],
                     ),
-                    const SizedBox(height: 20),
+                    SizedBox(height: screenSize.height * 0.04),
                   ],
                 ),
               ),

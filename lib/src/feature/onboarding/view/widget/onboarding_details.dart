@@ -9,18 +9,18 @@ class OnBoardingDetails extends StatefulWidget {
   final bool isTitle;
 
   const OnBoardingDetails({
-    super.key,
+    Key? key,
     required this.title,
     required this.subtitle,
     required this.imagePath,
     required this.isTitle,
-  });
+  }) : super(key: key);
 
   @override
-  State<OnBoardingDetails> createState() => _OnBoardingDetailsState();
+  State<OnBoardingDetails> createState() => OnBoardingDetailsState();
 }
 
-class _OnBoardingDetailsState extends State<OnBoardingDetails>
+class OnBoardingDetailsState extends State<OnBoardingDetails>
     with TickerProviderStateMixin {
   late GifController _controller;
 
@@ -36,20 +36,26 @@ class _OnBoardingDetailsState extends State<OnBoardingDetails>
     super.dispose();
   }
 
+  void loadGifs() {}
+
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+    final double screenWidth = screenSize.width;
+    final double screenHeight = screenSize.height;
+
     GifController controller = GifController(vsync: this);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const SizedBox(height: 50),
+        SizedBox(height: screenHeight * 0.06),
         widget.isTitle
             ? Text(
                 'app_name'.i18n(),
-                style: const TextStyle(
-                  fontSize: 40,
-                  color: Colors.white,
+                style: TextStyle(
+                  fontSize: screenWidth * 0.1,
+                  color: Theme.of(context).colorScheme.tertiary,
                 ),
                 textAlign: TextAlign.center,
               )
@@ -57,19 +63,19 @@ class _OnBoardingDetailsState extends State<OnBoardingDetails>
                 children: [
                   Text(
                     widget.title,
-                    style: const TextStyle(
-                      fontSize: 28,
+                    style: TextStyle(
+                      fontSize: screenWidth * 0.08,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.tertiary,
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: screenHeight * 0.04),
                   Text(
                     widget.subtitle,
-                    style: const TextStyle(
-                      fontSize: 22,
-                      color: Colors.white,
+                    style: TextStyle(
+                      fontSize: screenWidth * 0.06,
+                      color: Theme.of(context).colorScheme.tertiary,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -80,19 +86,18 @@ class _OnBoardingDetailsState extends State<OnBoardingDetails>
           controller: controller,
           autostart: Autostart.loop,
           duration: const Duration(seconds: 3),
-          placeholder: (context) => Text(
-            'loading'.i18n(),
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 22,
+          placeholder: (context) => Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: CircularProgressIndicator(
+              color: Theme.of(context).colorScheme.outline,
             ),
           ),
           onFetchCompleted: () {
             controller.reset();
             controller.forward();
           },
-          width: 340,
-          height: 320,
+          width: screenWidth * 0.9,
+          height: screenHeight * 0.4,
           fit: BoxFit.cover,
         ),
         if (widget.isTitle)
@@ -100,19 +105,19 @@ class _OnBoardingDetailsState extends State<OnBoardingDetails>
             children: [
               Text(
                 widget.title,
-                style: const TextStyle(
-                  fontSize: 24,
+                style: TextStyle(
+                  fontSize: screenWidth * 0.06,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.tertiary,
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: screenHeight * 0.04),
               Text(
                 widget.subtitle,
-                style: const TextStyle(
-                  fontSize: 18,
-                  color: Colors.white,
+                style: TextStyle(
+                  fontSize: screenWidth * 0.04,
+                  color: Theme.of(context).colorScheme.tertiary,
                 ),
                 textAlign: TextAlign.center,
               ),

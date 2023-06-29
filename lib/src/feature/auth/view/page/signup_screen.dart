@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:localization/localization.dart';
 
-import '../../repository/user_data.dart';
+import '../../../../common/custom_button.dart';
+import '../../../../common/custom_text_field.dart';
+import '../../repository/user_model.dart';
 import '../../viewmodel/auth_view_model.dart';
-import 'form_screen.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({Key? key}) : super(key: key);
@@ -15,11 +16,13 @@ class SignupScreen extends StatefulWidget {
 
 class SignupScreenState extends State<SignupScreen> {
   final _formKey = GlobalKey<FormState>();
+
   final _nameController = TextEditingController();
-  final _ageController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+
   final AuthViewModel _authViewModel = AuthViewModel();
+  bool _isLoading = false;
 
   bool isValidEmail(String email) {
     RegExp emailRegExp = RegExp(
@@ -38,41 +41,66 @@ class SignupScreenState extends State<SignupScreen> {
     return ageValue != null && ageValue > 0;
   }
 
-  void _submitForm() async {
-    if (_formKey.currentState!.validate()) {
+  void _showErrorDialog(String msg) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('error_occurred'.i18n()),
+        content: Text(msg),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text('close'.i18n()),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _submit() async {
+    final isValid = _formKey.currentState?.validate() ?? false;
+
+    if (!isValid) {
+      return;
+    }
+    setState(() => _isLoading = true);
+
+    _formKey.currentState!.save();
+
+    try {
       final user = User(
         name: _nameController.text,
-        age: int.parse(_ageController.text),
         email: _emailController.text,
         password: _passwordController.text,
         interests: [],
       );
 
-      await _authViewModel.register(
-          user.email, user.password, user.name, [], user.age);
+      //await _authViewModel.register(
+      //user.email, user.password, user.name!, user.interests, user.age!);
 
-      await _authViewModel.login(user.email, user.password);
+      //await _authViewModel.login(user.email, user.password);
 
-      Modular.to.push(
-        MaterialPageRoute(
-          builder: (_) => FormScreen(user: user),
-        ),
-      );
+      Modular.to.pushNamed('form', arguments: user);
+    } catch (error) {
+      _showErrorDialog(error.toString());
     }
+    setState(() => _isLoading = false);
   }
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
-          color: Color(0xFF0096C7),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.primary,
         ),
         child: Center(
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 40,
+              padding: EdgeInsets.symmetric(
+                horizontal: screenSize.width * 0.1,
               ),
               child: SizedBox(
                 width: double.infinity,
@@ -81,18 +109,18 @@ class SignupScreenState extends State<SignupScreen> {
                   children: [
                     Image.asset(
                       'lib/assets/images/logo.png',
-                      height: 170,
+                      height: screenSize.height * 0.2,
                     ),
                     Text(
-                      'sign_up_account'.i18n(),
-                      style: const TextStyle(
-                        fontSize: 24,
+                      'sign_up_title'.i18n(),
+                      style: TextStyle(
+                        fontSize: screenSize.width * 0.06,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.tertiary,
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 60),
+                    SizedBox(height: screenSize.height * 0.06),
                     Form(
                       key: _formKey,
                       child: Column(
@@ -103,27 +131,11 @@ class SignupScreenState extends State<SignupScreen> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
                             ),
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                contentPadding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                filled: true,
-                                fillColor: Colors.white,
-                                labelText: 'name_text_field'.i18n(),
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                  borderSide: const BorderSide(
-                                    color: Colors.grey,
-                                    width: 1.0,
-                                  ),
-                                ),
-                                alignLabelWithHint: false,
-                              ),
-                              maxLines: 1,
+                            child: CustomTextField(
+                              text: 'name_field'.i18n(),
                               keyboardType: TextInputType.emailAddress,
                               controller: _nameController,
+                              textInputAction: TextInputAction.next,
                               validator: (name) {
                                 if (name!.isEmpty) {
                                   return 'name_required'.i18n();
@@ -135,67 +147,16 @@ class SignupScreenState extends State<SignupScreen> {
                               },
                             ),
                           ),
-                          const SizedBox(height: 16),
+                          SizedBox(height: screenSize.height * 0.016),
                           Card(
                             elevation: 20,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
                             ),
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                contentPadding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                labelText: 'age_text_field'.i18n(),
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
-                                filled: true,
-                                fillColor: Colors.white,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                  borderSide: const BorderSide(
-                                    color: Colors.grey,
-                                    width: 1.0,
-                                  ),
-                                ),
-                              ),
-                              controller: _ageController,
-                              validator: (age) {
-                                if (age!.isEmpty) {
-                                  return 'age_required'.i18n();
-                                } else if (!isValidAge(age)) {
-                                  return 'age_invalid'.i18n();
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-                          Card(
-                            elevation: 20,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                contentPadding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                filled: true,
-                                fillColor: Colors.white,
-                                labelText: 'email_text_field'.i18n(),
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                  borderSide: const BorderSide(
-                                    color: Colors.grey,
-                                    width: 1.0,
-                                  ),
-                                ),
-                                alignLabelWithHint: false,
-                              ),
-                              maxLines: 1,
+                            child: CustomTextField(
+                              text: 'email_field'.i18n(),
                               keyboardType: TextInputType.emailAddress,
-                              controller: _emailController,
+                              textInputAction: TextInputAction.next,
                               validator: (email) {
                                 if (email!.isEmpty) {
                                   return 'email_required'.i18n();
@@ -206,31 +167,17 @@ class SignupScreenState extends State<SignupScreen> {
                               },
                             ),
                           ),
-                          const SizedBox(height: 16),
+                          SizedBox(height: screenSize.height * 0.016),
                           Card(
                             elevation: 20,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
                             ),
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                contentPadding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                labelText: 'password_text_field'.i18n(),
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
-                                filled: true,
-                                fillColor: Colors.white,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                  borderSide: const BorderSide(
-                                    color: Colors.grey,
-                                    width: 1.0,
-                                  ),
-                                ),
-                              ),
+                            child: CustomTextField(
+                              text: 'password_field'.i18n(),
                               obscureText: true,
                               controller: _passwordController,
+                              textInputAction: TextInputAction.next,
                               validator: (password) {
                                 if (password!.isEmpty) {
                                   return 'password_required'.i18n();
@@ -241,68 +188,61 @@ class SignupScreenState extends State<SignupScreen> {
                               },
                             ),
                           ),
+                          SizedBox(height: screenSize.height * 0.016),
+                          Card(
+                            elevation: 20,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: CustomTextField(
+                              text: 'confirm_password'.i18n(),
+                              obscureText: true,
+                              validator: (password) {
+                                if (password != _passwordController.text) {
+                                  return 'passwords_do_not_match'.i18n();
+                                }
+                                return null;
+                              },
+                              onFieldSubmitted: (_) {
+                                _submit();
+                              },
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                    const SizedBox(height: 40),
-                    ElevatedButton(
-                      onPressed: _submitForm,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.orange.shade700,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 56,
-                          vertical: 6,
-                        ),
-                        elevation: 20,
-                      ),
-                      child: Text(
-                        "sign_up".i18n(),
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 80),
+                    SizedBox(height: screenSize.height * 0.04),
+                    _isLoading
+                        ? CircularProgressIndicator(
+                            color: Theme.of(context).colorScheme.outline,
+                          )
+                        : CustomButton(
+                            size: screenSize,
+                            onPressed: _submit,
+                            buttonText: 'sign_in'.i18n(),
+                          ),
+                    SizedBox(height: screenSize.height * 0.08),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           'with_account'.i18n(),
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.tertiary,
+                            fontSize: screenSize.width * 0.04,
                           ),
                         ),
-                        ElevatedButton(
+                        CustomButton(
+                          size: screenSize,
                           onPressed: () {
                             Modular.to.pop();
                           },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.orange.shade700,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 15,
-                              vertical: 4,
-                            ),
-                            elevation: 20,
-                          ),
-                          child: Text(
-                            "login".i18n(),
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          buttonText: 'login'.i18n(),
+                          isBig: false,
                         ),
                       ],
                     ),
-                    const SizedBox(height: 20),
+                    SizedBox(height: screenSize.height * 0.02),
                   ],
                 ),
               ),

@@ -21,4 +21,11 @@ class AuthViewModel extends ChangeNotifier {
 
     return user;
   }
+
+  Future<Map<String, dynamic>> resetPassword(String email) async {
+    final data = await _authRepository.resetPassword(email);
+    final response = jsonDecode(data);
+
+    return response;
+  }
 }

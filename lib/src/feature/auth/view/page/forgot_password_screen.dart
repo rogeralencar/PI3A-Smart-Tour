@@ -2,16 +2,60 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:localization/localization.dart';
 
-class ForgotPassword extends StatefulWidget {
-  const ForgotPassword({Key? key}) : super(key: key);
+import '../../viewmodel/auth_view_model.dart';
+import '../../../../common/custom_button.dart';
+import '../../../../common/custom_text_field.dart';
+
+class ForgotPasswordScreen extends StatefulWidget {
+  const ForgotPasswordScreen({Key? key}) : super(key: key);
 
   @override
-  ForgotPasswordState createState() => ForgotPasswordState();
+  ForgotPasswordScreenState createState() => ForgotPasswordScreenState();
 }
 
-class ForgotPasswordState extends State<ForgotPassword> {
+class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final _emailController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  final AuthViewModel _authViewModel = AuthViewModel();
+
+  bool _isLoading = false;
+  bool _isEmailSent = false;
+
+  void _showErrorDialog(String msg) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('error_occurred'.i18n()),
+        content: Text(msg),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text('close'.i18n()),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showSuccessDialog() {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('success_email_send'.i18n()),
+        content: Text('forgot_password_mensage'.i18n()),
+        actions: [
+          ElevatedButton(
+            child: Text('ok'.i18n()),
+            onPressed: () {
+              Navigator.of(context).pop();
+              Modular.to.pop();
+            },
+          ),
+        ],
+      ),
+    );
+  }
 
   Future<void> _submit() async {
     final isValid = _formKey.currentState?.validate() ?? false;
@@ -19,7 +63,24 @@ class ForgotPasswordState extends State<ForgotPassword> {
     if (!isValid) {
       return;
     }
-    Modular.to.pop();
+
+    setState(() => _isLoading = true);
+
+    _formKey.currentState?.save();
+
+    try {
+      await _authViewModel.resetPassword(_emailController.text);
+
+      setState(() {
+        _isEmailSent = true;
+        _isLoading = false;
+      });
+
+      _showSuccessDialog();
+    } catch (error) {
+      _showErrorDialog('unexpected_error'.i18n());
+      setState(() => _isLoading = false);
+    }
   }
 
   bool isValidEmail(String email) {
@@ -29,37 +90,44 @@ class ForgotPasswordState extends State<ForgotPassword> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
-          color: Color(0xFF0096C7),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.primary,
         ),
         child: Center(
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 40,
+              padding: EdgeInsets.symmetric(
+                horizontal: screenSize.width * 0.1,
               ),
               child: SizedBox(
                 width: double.infinity,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Image.asset(
                       'lib/assets/images/logo.png',
-                      height: 170,
+                      height: screenSize.height * 0.2,
                     ),
                     Text(
                       'reset_password'.i18n(),
-                      style: const TextStyle(
-                        fontSize: 24,
+                      style: TextStyle(
+                        fontSize: screenSize.width * 0.06,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.tertiary,
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 60),
+                    SizedBox(height: screenSize.height * 0.06),
                     Form(
                       key: _formKey,
                       child: Column(
@@ -70,27 +138,10 @@ class ForgotPasswordState extends State<ForgotPassword> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
                             ),
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                contentPadding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                filled: true,
-                                fillColor: Colors.white,
-                                labelText: 'email_text_field'.i18n(),
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                  borderSide: const BorderSide(
-                                    color: Colors.grey,
-                                    width: 1.0,
-                                  ),
-                                ),
-                                alignLabelWithHint: false,
-                              ),
-                              maxLines: 1,
-                              keyboardType: TextInputType.emailAddress,
+                            child: CustomTextField(
+                              text: 'email_field'.i18n(),
                               controller: _emailController,
+                              keyboardType: TextInputType.emailAddress,
                               validator: (email) {
                                 if (email!.isEmpty) {
                                   return 'email_required'.i18n();
@@ -99,32 +150,30 @@ class ForgotPasswordState extends State<ForgotPassword> {
                                 }
                                 return null;
                               },
+                              onFieldSubmitted: (_) {
+                                _submit();
+                              },
                             ),
                           ),
                         ],
                       ),
                     ),
-                    const SizedBox(height: 30),
-                    ElevatedButton(
-                      onPressed: _submit,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.orange.shade700,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 60,
-                          vertical: 6,
-                        ),
-                        elevation: 20,
-                      ),
-                      child: Text(
-                        "send".i18n(),
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                    SizedBox(height: screenSize.height * 0.06),
+                    _isLoading
+                        ? CircularProgressIndicator(
+                            color: Theme.of(context).colorScheme.outline,
+                          )
+                        : CustomButton(
+                            size: screenSize,
+                            onPressed:
+                                _isEmailSent ? _showSuccessDialog : _submit,
+                            buttonText: 'send'.i18n(),
+                          ),
+                    SizedBox(height: screenSize.height * 0.12),
+                    CustomButton(
+                      size: screenSize,
+                      onPressed: (() => Modular.to.pop()),
+                      buttonText: 'back'.i18n(),
                     ),
                   ],
                 ),

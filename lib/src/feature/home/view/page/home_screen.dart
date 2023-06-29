@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
+import 'package:provider/provider.dart';
 
+import '../../../auth/repository/user_model.dart';
+import '../../../auth/repository/user_provider.dart';
 import '../widget/places_autocomplete.dart';
-import '../../../auth/repository/user_data.dart';
 
 class HomeScreen extends StatefulWidget {
-  final User user;
-
-  const HomeScreen({super.key, required this.user});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -26,10 +26,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    UserProvider userProvider = Provider.of(context, listen: false);
+    User? user = userProvider.user;
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
-          color: Colors.white,
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.tertiary,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -37,35 +39,38 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 60),
             Text(
               'app_name'.i18n(),
-              style: const TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF0096C7)),
+              style: TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.primary,
+              ),
             ),
             const SizedBox(height: 40),
             Column(
               children: [
                 Text(
                   'home_question'.i18n(),
-                  style: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF0096C7)),
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 ),
                 const SizedBox(height: 40),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: AutocompletePlaces(
-                    userInterests: widget.user.interests,
+                    userInterests: user!.interests,
                   ),
                 ),
                 const SizedBox(height: 40),
                 Text(
                   'suggestions'.i18n(),
-                  style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF0096C7)),
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 ),
               ],
             ),

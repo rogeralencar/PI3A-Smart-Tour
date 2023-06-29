@@ -35,4 +35,18 @@ class AuthService {
 
     return response.body;
   }
+
+  Future<dynamic> resetPassword(String email) async {
+    final response = await http.post(
+      Uri.parse('$_baseUrl/resetPassword/'),
+      body: jsonEncode({
+        'email': email,
+      }),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    log('Response: ${response.body}');
+
+    return response.body;
+  }
 }

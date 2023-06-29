@@ -12,4 +12,8 @@ class AuthRepository {
     return await _authService.register(
         email, password, username, interests, age);
   }
+
+  Future<dynamic> resetPassword(String email) async {
+    return await _authService.resetPassword(email);
+  }
 }

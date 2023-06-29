@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:localization/localization.dart';
 
 @immutable
 class Places {
@@ -173,6 +174,34 @@ class AutocompletePlaces extends StatelessWidget {
           onSelected: (Places selection) {
             debugPrint(_displayStringForOption(selection));
             debugPrint(userInterests.toString());
+          },
+          fieldViewBuilder: (BuildContext context,
+              TextEditingController textEditingController,
+              FocusNode focusNode,
+              VoidCallback onFieldSubmitted) {
+            return TextField(
+              controller: textEditingController,
+              focusNode: focusNode,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+              decoration: InputDecoration(
+                hintText: 'search'.i18n(),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    Icons.search,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  onPressed: onFieldSubmitted,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(18.0),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).colorScheme.outline,
+                  ),
+                ),
+              ),
+            );
           },
         ),
       ],
