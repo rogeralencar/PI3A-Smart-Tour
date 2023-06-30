@@ -174,6 +174,13 @@ class AutocompletePlaces extends StatelessWidget {
           onSelected: (Places selection) {
             debugPrint(_displayStringForOption(selection));
             debugPrint(userInterests.toString());
+
+            List<Places> filteredDestinations =
+                _userOptions.where((destination) {
+              return userInterests.contains(destination.name);
+            }).toList();
+
+            debugPrint(filteredDestinations.toString());
           },
           fieldViewBuilder: (BuildContext context,
               TextEditingController textEditingController,

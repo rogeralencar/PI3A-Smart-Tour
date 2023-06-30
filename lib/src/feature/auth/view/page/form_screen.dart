@@ -4,7 +4,7 @@ import 'package:localization/localization.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../common/custom_button.dart';
-import '../../../../common/interests_data.dart';
+import '../../../home/repository/interests_data.dart';
 import '../../repository/user_model.dart';
 import '../../repository/user_provider.dart';
 

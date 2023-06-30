@@ -11,6 +11,7 @@ class UserProvider with ChangeNotifier {
   ]);
 
   void setUser(User user) {
+    user.userId = user.name;
     _user = user;
     notifyListeners();
   }

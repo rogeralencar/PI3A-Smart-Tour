@@ -64,7 +64,7 @@ class ProfileScreen extends StatelessWidget {
                     leading: const CircleAvatar(
                       radius: 30,
                       backgroundImage:
-                          AssetImage('lib/assets/images/travel.jpg'),
+                          AssetImage('lib/assets/images/travels/travel.jpg'),
                     ),
                     title: Text('travel ${index + 1}'),
                     subtitle: Text('date'.i18n()),

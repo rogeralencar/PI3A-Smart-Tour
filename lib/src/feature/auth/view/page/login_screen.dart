@@ -64,7 +64,7 @@ class LoginScreenState extends State<LoginScreen> {
 
     try {
       final user = User(
-        name: 'Username',
+        name: 'user1',
         email: _email,
         password: _password,
         interests: [

@@ -52,7 +52,7 @@ class RatingScreenState extends State<RatingScreen> {
                     leading: const CircleAvatar(
                       radius: 30,
                       backgroundImage:
-                          AssetImage('lib/assets/images/travel.jpg'),
+                          AssetImage('lib/assets/images/travels/travel.jpg'),
                     ),
                     title: Text(_trips[index]['destination']),
                     subtitle: Text('Note: ${_trips[index]['rating']}'),
@@ -80,7 +80,7 @@ class RatingScreenState extends State<RatingScreen> {
                     leading: const CircleAvatar(
                       radius: 30,
                       backgroundImage:
-                          AssetImage('lib/assets/images/travel.jpg'),
+                          AssetImage('lib/assets/images/travels/travel.jpg'),
                     ),
                     title: Text(_trips[index]['destination']),
                     subtitle: Text('Note: ${_trips[index]['rating']}'),

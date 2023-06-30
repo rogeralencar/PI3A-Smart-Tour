@@ -4,9 +4,10 @@ import 'package:localization/localization.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../common/custom_button.dart';
-import '../../../../common/interests_data.dart';
+import '../../repository/interests_data.dart';
 import '../../../auth/repository/user_model.dart';
 import '../../../auth/repository/user_provider.dart';
+import '../../repository/interests_model.dart';
 
 class InterestsScreen extends StatelessWidget {
   const InterestsScreen({Key? key}) : super(key: key);
@@ -73,7 +74,7 @@ class InterestsScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: CustomButton(
-                onPressed: () => Modular.to.pushNamed('interestsSelection'),
+                onPressed: () => Modular.to.pushNamed('interestSelection'),
                 buttonText: 'Edit Interests',
                 size: screenSize,
               ),

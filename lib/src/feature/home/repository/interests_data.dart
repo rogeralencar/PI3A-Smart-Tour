@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Interests {
-  final String name;
-  final IconData iconData;
-
-  Interests({required this.name, required this.iconData});
-}
+import 'interests_model.dart';
 
 List<Interests> interestsList = [
   Interests(name: 'Adventure', iconData: Icons.directions_bike),
