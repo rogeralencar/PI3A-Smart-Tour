@@ -13,7 +13,13 @@ List<Travel> travelList = [
       "salvador_image2.jpg",
       "salvador_image3.jpg"
     ],
-    interests: ["Praias", "Cultura", "Arquitetura", "Gastronomia", "Música"],
+    interests: [
+      "Beaches",
+      "Culture",
+      "Architecture",
+      "Gastronomy",
+      "Music",
+    ],
     rating: 4.7,
   ),
   Travel(
@@ -29,11 +35,11 @@ List<Travel> travelList = [
       "fernando_noronha_image3.jpg"
     ],
     interests: [
-      "Praias",
-      "Mergulho",
-      "Natureza",
-      "Ecoturismo",
-      "Preservação Ambiental"
+      "Beaches",
+      "Diving",
+      "Nature",
+      "Ecotourism",
+      "Environmental Preservation",
     ],
     rating: 4.5,
   ),
@@ -46,11 +52,11 @@ List<Travel> travelList = [
         "Descubra a beleza natural de Bonito, com suas águas cristalinas, cachoeiras deslumbrantes e grutas subterrâneas. Faça flutuação em rios, explore trilhas ecológicas e aproveite as atividades de ecoturismo oferecidas na região.",
     images: ["bonito_image1.jpg", "bonito_image2.jpg", "bonito_image3.jpg"],
     interests: [
-      "Natureza",
-      "Aventura",
-      "Ecoturismo",
-      "Cachoeiras",
-      "Preservação Ambiental"
+      "Nature",
+      "Adventure",
+      "Ecotourism",
+      "Waterfalls",
+      "Environmental Preservation",
     ],
     rating: 4.8,
   ),
@@ -63,11 +69,11 @@ List<Travel> travelList = [
         "Experimente o charme de Gramado, uma cidade encantadora com arquitetura europeia, belos jardins e clima serrano. Visite os parques temáticos, desfrute da culinária local e aproveite os festivais e eventos culturais da região.",
     images: ["gramado_image1.jpg", "gramado_image2.jpg", "gramado_image3.jpg"],
     interests: [
-      "Cultura",
-      "Gastronomia",
-      "Natureza",
-      "Festivais",
-      "Arquitetura"
+      "Culture",
+      "Gastronomy",
+      "Nature",
+      "Festivals",
+      "Architecture",
     ],
     rating: 4.6,
   ),
@@ -80,11 +86,10 @@ List<Travel> travelList = [
         "Explore a exuberante cidade de Manaus, cercada pela Floresta Amazônica. Descubra a biodiversidade da região, faça passeios de barco pelos rios e visite o famoso Teatro Amazonas, um marco cultural da cidade.",
     images: ["manaus_image1.jpg", "manaus_image2.jpg", "manaus_image3.jpg"],
     interests: [
-      "Natureza",
-      "Cultura",
-      "Passeios de Barco",
-      "Ecoturismo",
-      "Arquitetura"
+      "Nature",
+      "Culture",
+      "Ecotourism",
+      "Architecture",
     ],
     rating: 4.9,
   ),
@@ -97,11 +102,10 @@ List<Travel> travelList = [
         "Visite Búzios, uma charmosa cidade litorânea no Rio de Janeiro, conhecida por suas praias deslumbrantes e atmosfera sofisticada. Explore as praias, pratique esportes aquáticos e aproveite a animada vida noturna.",
     images: ["buzios_image1.jpg", "buzios_image2.jpg", "buzios_image3.jpg"],
     interests: [
-      "Praias",
-      "Esportes Aquáticos",
-      "Gastronomia",
-      "Vida Noturna",
-      "Turismo de Luxo"
+      "Beaches",
+      "Gastronomy",
+      "Nightlife",
+      "Luxury Tourism",
     ],
     rating: 4.7,
   ),
@@ -118,11 +122,11 @@ List<Travel> travelList = [
       "chapada_veadeiros_image3.jpg"
     ],
     interests: [
-      "Natureza",
-      "Aventura",
-      "Cachoeiras",
-      "Trilhas",
-      "Preservação Ambiental"
+      "Nature",
+      "Adventure",
+      "Waterfalls",
+      "Hiking",
+      "Environmental Preservation",
     ],
     rating: 4.9,
   ),
@@ -139,11 +143,9 @@ List<Travel> travelList = [
       "jericoacoara_image3.jpg"
     ],
     interests: [
-      "Praias",
-      "Esportes de Vento",
-      "Passeios de Buggy",
-      "Natureza",
-      "Pôr do Sol"
+      "Beaches",
+      "Wind Sports",
+      "Nature",
     ],
     rating: 4.8,
   ),
@@ -160,11 +162,11 @@ List<Travel> travelList = [
       "lencois_maranhenses_image3.jpg"
     ],
     interests: [
-      "Natureza",
-      "Aventura",
-      "Fotografia",
-      "Lagoas",
-      "Preservação Ambiental"
+      "Nature",
+      "Adventure",
+      "Photography",
+      "Lagoons",
+      "Environmental Preservation",
     ],
     rating: 4.9,
   ),
@@ -177,11 +179,11 @@ List<Travel> travelList = [
         "Descubra as águas cristalinas de Bonito, um destino de ecoturismo no coração do Brasil. Faça flutuação em rios de águas transparentes, mergulhe em cavernas e conheça a rica fauna e flora da região.",
     images: ["bonito_image1.jpg", "bonito_image2.jpg", "bonito_image3.jpg"],
     interests: [
-      "Natureza",
-      "Ecoturismo",
-      "Flutuação",
-      "Mergulho",
-      "Preservação Ambiental"
+      "Beaches",
+      "Wind Sports",
+      "Buggy Rides",
+      "Nature",
+      "Sunset",
     ],
     rating: 4.6,
   ),
@@ -198,14 +200,13 @@ List<Travel> travelList = [
       "fernando_noronha_image3.jpg"
     ],
     interests: [
-      "Praias",
-      "Mergulho",
-      "Natureza",
-      "Preservação Ambiental",
-      "Trilhas"
+      "Nature",
+      "Ecotourism",
+      "Environmental Preservation",
     ],
     rating: 4.9,
   ),
+  //
   Travel(
     userId: "user5",
     destinyName: "Gramado, Rio Grande do Sul",
