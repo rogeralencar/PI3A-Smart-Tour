@@ -7,38 +7,47 @@ class AuthService {
 
   Future<dynamic> login(String email, String password) async {
     final response = await http.post(
-      Uri.parse('$_baseUrl/login/'),
+      Uri.parse('$_baseUrl/auth/jwt/create/'),
       body: jsonEncode({'email': email, 'password': password}),
       headers: {'Content-Type': 'application/json'},
     );
 
-    log('User: ${response.body}');
+    final user = await http.get(
+      Uri.parse('$_baseUrl/auth/users/me/'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'JWT ${json.decode(response.body)['access']}'
+      },
+    );
 
-    return response.body;
+    return jsonDecode(user.body);
   }
 
-  Future<dynamic> register(String email, String password, String username,
-      List<String> interests, int age) async {
+  List<String> splitInterests(String text) {
+    return text.split(',');
+  }
+
+  Future<dynamic> register(
+      String email, String password, String name, String interests) async {
     final response = await http.post(
-      Uri.parse('$_baseUrl/register/'),
+      Uri.parse('$_baseUrl/auth/users/'),
       body: jsonEncode({
         'email': email,
+        'name': name,
         'password': password,
         'interests': interests,
-        'username': username,
-        'age': age
       }),
       headers: {'Content-Type': 'application/json'},
     );
 
-    log('User: ${response.body}');
+    final userlogin = login(email, password);
 
-    return response.body;
+    return userlogin;
   }
 
   Future<dynamic> resetPassword(String email) async {
     final response = await http.post(
-      Uri.parse('$_baseUrl/resetPassword/'),
+      Uri.parse('$_baseUrl/auth/users/reset_password/'),
       body: jsonEncode({
         'email': email,
       }),

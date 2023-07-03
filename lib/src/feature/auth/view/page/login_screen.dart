@@ -63,23 +63,12 @@ class LoginScreenState extends State<LoginScreen> {
     UserProvider userProvider = Provider.of(context, listen: false);
 
     try {
-      final user = User(
-        name: 'user1',
-        email: _email,
-        password: _password,
-        interests: [
-          'Adventure',
-          'Art',
-          'Beaches',
-        ],
-      );
+      final user = await _authViewModel.login(_email, _password);
 
-      //await _authViewModel.login(_email, _password);
-
-      userProvider.setUser(user);
+      userProvider.setUser(User.fromJson(user));
       Modular.to.navigate('/home/');
     } catch (error) {
-      _showErrorDialog('unexpected_error'.i18n());
+      _showErrorDialog('unexpected_error $error'.i18n());
     }
     setState(() => _isLoading = false);
   }

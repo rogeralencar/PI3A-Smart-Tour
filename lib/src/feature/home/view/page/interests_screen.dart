@@ -15,7 +15,7 @@ class InterestsScreen extends StatelessWidget {
   Widget buildInterestItem(int itemIndex, BuildContext context, User? user) {
     String? interestName = user!.interests[itemIndex];
     Interests? interest = interestsList.firstWhere(
-      (element) => element.name == interestName,
+      (element) => element.name == interestName.trim(),
     );
     return SizedBox(
       height: 140,

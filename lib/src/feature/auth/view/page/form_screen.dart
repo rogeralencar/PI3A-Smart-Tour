@@ -7,6 +7,7 @@ import '../../../../common/custom_button.dart';
 import '../../../home/repository/interests_data.dart';
 import '../../repository/user_model.dart';
 import '../../repository/user_provider.dart';
+import '../../viewmodel/auth_view_model.dart';
 
 class FormScreen extends StatefulWidget {
   final User user;
@@ -23,6 +24,38 @@ class FormScreenState extends State<FormScreen> {
   List<String> selectedInterests = [];
 
   bool get isButtonEnabled => selectedInterests.length >= 3;
+  final AuthViewModel _authViewModel = AuthViewModel();
+
+  void _showErrorDialog(String msg) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('error_occurred'.i18n()),
+        content: Text(msg),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text('close'.i18n()),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _submit() async {
+    UserProvider userProvider = Provider.of(context, listen: false);
+
+    try {
+      String interests = widget.user.interests.join(', ');
+      final user = await _authViewModel.register(
+          widget.user.email, widget.user.password, widget.user.name, interests);
+
+      userProvider.setUser(User.fromJson(user));
+      Modular.to.navigate('/home/');
+    } catch (error) {
+      _showErrorDialog('unexpected_error: $error'.i18n());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -111,8 +144,9 @@ class FormScreenState extends State<FormScreen> {
                 isEnabled: isButtonEnabled,
                 onPressed: () {
                   widget.user.interests = selectedInterests;
-                  userProvider.setUser(widget.user);
-                  Modular.to.navigate('/home/');
+                  _submit();
+                  // userProvider.setUser(widget.user);
+                  // Modular.to.navigate('/home/');
                 },
                 buttonText: 'continue'.i18n(),
                 size: screenSize,

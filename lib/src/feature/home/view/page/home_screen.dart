@@ -48,6 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: AutocompletePlaces(
                   userInterests: user!.interests,
+                  userId: user.userId,
                 ),
               ),
               const SizedBox(height: 40),

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
+import 'dart:developer';
+
+import 'package:smart_tour/src/feature/recommendation/viewmodel/recommendation_view_model.dart';
 
 @immutable
 class Places {
@@ -30,8 +33,36 @@ class Places {
 
 class AutocompletePlaces extends StatelessWidget {
   final List userInterests;
+  final int? userId;
 
-  const AutocompletePlaces({super.key, required this.userInterests});
+  const AutocompletePlaces(
+      {super.key, required this.userInterests, required this.userId});
+
+  static final RecommendationViewModel _recommendationViewModel =
+      RecommendationViewModel();
+
+  void _submit(int id, String local, List<dynamic> interests) async {
+    try {
+      final rec = await _recommendationViewModel.getRecommendation(
+          id, local, interests);
+
+          /* O REC
+            {
+                "recomendações": [
+                    "Cachoeira Piscininha do Silvestre",
+                    "Palácio das Laranjeiras",
+                    "Largo do Boticário",
+                    "Arco do Teles",
+                    "Praça Mauá"
+                ]
+            }
+          */
+
+      // Modular.to.navigate('/home/');
+    } catch (error) {
+      log('unexpected_error $error'.i18n());
+    }
+  }
 
   static const List<Places> _userOptions = <Places>[
     Places(name: 'São Paulo, SP', location: 'São Paulo'),
@@ -172,15 +203,14 @@ class AutocompletePlaces extends StatelessWidget {
             }
           },
           onSelected: (Places selection) {
-            debugPrint(_displayStringForOption(selection));
-            debugPrint(userInterests.toString());
+            _submit(userId!, selection.location, userInterests);
 
-            List<Places> filteredDestinations =
-                _userOptions.where((destination) {
-              return userInterests.contains(destination.name);
-            }).toList();
+            // List<Places> filteredDestinations =
+            //     _userOptions.where((destination) {
+            //   return userInterests.contains(destination.name);
+            // }).toList();
 
-            debugPrint(filteredDestinations.toString());
+            // log(filteredDestinations.toString());
           },
           fieldViewBuilder: (BuildContext context,
               TextEditingController textEditingController,

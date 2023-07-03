@@ -24,10 +24,11 @@ class SignupScreenState extends State<SignupScreen> {
   final AuthViewModel _authViewModel = AuthViewModel();
   bool _isLoading = false;
 
-  bool isValidEmail(String email) {
-    RegExp emailRegExp = RegExp(
-        r'^[a-zA-Z0-9.!#$%&*+\=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$');
-    return emailRegExp.hasMatch(email);
+  String isValidEmail(String email) {
+    // RegExp emailRegExp = RegExp(
+    //     r'^[a-zA-Z0-9.!#$%&*+\=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$');
+    // return emailRegExp.hasMatch(email);
+    return email;
   }
 
   bool isValidPassword(String password) {
@@ -74,11 +75,6 @@ class SignupScreenState extends State<SignupScreen> {
         password: _passwordController.text,
         interests: [],
       );
-
-      //await _authViewModel.register(
-      //user.email, user.password, user.name!, user.interests, user.age!);
-
-      //await _authViewModel.login(user.email, user.password);
 
       Modular.to.pushNamed('form', arguments: user);
     } catch (error) {
@@ -156,15 +152,16 @@ class SignupScreenState extends State<SignupScreen> {
                             child: CustomTextField(
                               text: 'email_field'.i18n(),
                               keyboardType: TextInputType.emailAddress,
+                              controller: _emailController,
                               textInputAction: TextInputAction.next,
-                              validator: (email) {
-                                if (email!.isEmpty) {
-                                  return 'email_required'.i18n();
-                                } else if (!isValidEmail(email)) {
-                                  return 'email_invalid'.i18n();
-                                }
-                                return null;
-                              },
+                              // validator: (email) {
+                              //   if (email!.isEmpty) {
+                              //     return 'email_required'.i18n();
+                              //   } else if (!isValidEmail(email)) {
+                              //     return 'email_invalid'.i18n();
+                              //   }
+                              //   return null;
+                              // },
                             ),
                           ),
                           SizedBox(height: screenSize.height * 0.016),

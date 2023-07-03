@@ -7,10 +7,10 @@ class AuthRepository {
     return await _authService.login(email, password);
   }
 
-  Future<dynamic> register(String email, String password, String username,
-      List<String> interests, int age) async {
+  Future<dynamic> register(String email, String password, String name,
+      String interests) async {
     return await _authService.register(
-        email, password, username, interests, age);
+        email, password, name, interests);
   }
 
   Future<dynamic> resetPassword(String email) async {
