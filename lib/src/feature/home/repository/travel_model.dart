@@ -2,14 +2,14 @@ class Travel {
   String destinyName;
   String description;
   List<String> images;
-  List<String> interests;
-  double rating;
+  final double latitude;
+  final double longitude;
 
   Travel({
     required this.destinyName,
     required this.description,
     required this.images,
-    required this.interests,
-    required this.rating,
+    required this.latitude,
+    required this.longitude,
   });
 }

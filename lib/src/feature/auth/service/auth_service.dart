@@ -29,7 +29,7 @@ class AuthService {
 
   Future<dynamic> register(
       String email, String password, String name, String interests) async {
-    final response = await http.post(
+    await http.post(
       Uri.parse('$_baseUrl/auth/users/'),
       body: jsonEncode({
         'email': email,
@@ -53,9 +53,7 @@ class AuthService {
       }),
       headers: {'Content-Type': 'application/json'},
     );
-
     log('Response: ${response.body}');
-
     return response.body;
   }
 }

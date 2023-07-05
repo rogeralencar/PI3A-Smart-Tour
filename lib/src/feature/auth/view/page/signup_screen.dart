@@ -5,7 +5,6 @@ import 'package:localization/localization.dart';
 import '../../../../common/custom_button.dart';
 import '../../../../common/custom_text_field.dart';
 import '../../repository/user_model.dart';
-import '../../viewmodel/auth_view_model.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({Key? key}) : super(key: key);
@@ -21,7 +20,6 @@ class SignupScreenState extends State<SignupScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  final AuthViewModel _authViewModel = AuthViewModel();
   bool _isLoading = false;
 
   String isValidEmail(String email) {

@@ -145,8 +145,8 @@ class FormScreenState extends State<FormScreen> {
                 onPressed: () {
                   widget.user.interests = selectedInterests;
                   _submit();
-                  // userProvider.setUser(widget.user);
-                  // Modular.to.navigate('/home/');
+                  userProvider.setUser(widget.user);
+                  Modular.to.navigate('/home/');
                 },
                 buttonText: 'continue'.i18n(),
                 size: screenSize,

@@ -7,4 +7,8 @@ class RecommendationRepository {
       int id, String local, List<dynamic> interests) async {
     return await _recommendationService.getRecommendation(id, local, interests);
   }
+
+  Future<dynamic> getDetailPlace(String local) async {
+    return await _recommendationService.getDetailsOfPlace(local);
+  }
 }

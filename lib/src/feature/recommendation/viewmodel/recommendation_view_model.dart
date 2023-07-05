@@ -12,4 +12,10 @@ class RecommendationViewModel extends ChangeNotifier {
 
     return recommendations;
   }
+
+  Future<Map<String, dynamic>> getDetailPlace(String local) async {
+    final details = await _recommendationRepository.getDetailPlace(local);
+
+    return details;
+  }
 }

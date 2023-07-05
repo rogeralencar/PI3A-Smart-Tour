@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../../auth/repository/user_model.dart';
 import '../../repository/dummy_travel_data.dart';
-import '../../repository/travel_model.dart';
 
 class SuggestionsWidget extends StatelessWidget {
   const SuggestionsWidget({

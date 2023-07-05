@@ -17,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    Map<String, dynamic> detail = {};
     UserProvider userProvider = Provider.of(context, listen: false);
     User? user = userProvider.user;
     return Scaffold(
@@ -49,6 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: AutocompletePlaces(
                   userInterests: user!.interests,
                   userId: user.userId,
+                  detail: detail,
                 ),
               ),
               const SizedBox(height: 40),

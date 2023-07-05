@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:localization/localization.dart';
 
-import '../../repository/interests_data.dart';
 import '../../repository/travel_model.dart';
+import '../widget/location_input.dart';
 
 class TravelDetailsScreen extends StatefulWidget {
   final Travel travel;
@@ -46,19 +46,6 @@ class _TravelDetailsScreenState extends State<TravelDetailsScreen> {
               }).toList(),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  const Icon(
-                    Icons.star,
-                    color: Colors.yellow,
-                  ),
-                  const SizedBox(width: 4),
-                  Text(widget.travel.rating.toStringAsFixed(1)),
-                ],
-              ),
-            ),
-            Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,11 +61,8 @@ class _TravelDetailsScreenState extends State<TravelDetailsScreen> {
                   const SizedBox(height: 8),
                   Text(widget.travel.description, textAlign: TextAlign.justify),
                   const SizedBox(height: 16),
-                  Container(
-                    alignment: Alignment.center,
-                    child: ElevatedButton(
-                        onPressed: () {}, child: Text('Veja no Maps')),
-                  )
+                  LocationInput(
+                      widget.travel.latitude, widget.travel.longitude),
                 ],
               ),
             ),
