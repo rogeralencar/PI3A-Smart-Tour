@@ -2,306 +2,75 @@ import 'travel_model.dart';
 
 List<Travel> travelList = [
   Travel(
-    userId: "user1",
-    destinyName: "Salvador, Bahia",
-    departureDate: DateTime(2023, 7, 15),
-    returnDate: DateTime(2023, 7, 22),
+    destinyName: "Maranhão, Lençóis Maranhenses,",
     description:
-        "Explore a cidade de Salvador, com suas praias deslumbrantes, rica cultura afro-brasileira e arquitetura histórica. Visite o Pelourinho, experimente a culinária baiana e aproveite as festas e ritmos locais.",
+        "Os Lençóis Maranhenses são um verdadeiro paraíso natural localizado no estado do Maranhão, no nordeste do Brasil. O parque nacional é famoso por suas dunas de areia branca intercaladas por lagoas de água cristalina, formando uma paisagem deslumbrante. Durante a temporada de chuvas, as lagoas estão cheias, criando um cenário espetacular para os visitantes desfrutarem de mergulhos refrescantes e caminhadas pelas dunas. É um destino único e de tirar o fôlego.",
     images: [
-      "salvador_image1.jpg",
-      "salvador_image2.jpg",
-      "salvador_image3.jpg"
+      "lib/assets/images/travels/travel.jpg",
+      "lib/assets/images/travels/travel.jpg",
+      "lib/assets/images/travels/travel.jpg",
     ],
-    interests: [
-      "Beaches",
-      "Culture",
-      "Architecture",
-      "Gastronomy",
-      "Music",
-    ],
+    interests: ["praia", "dunas", "lagoas", "aventura", "fotografia"],
     rating: 4.7,
   ),
   Travel(
-    userId: "user1",
-    destinyName: "Fernando de Noronha, Pernambuco",
-    departureDate: DateTime(2023, 8, 10),
-    returnDate: DateTime(2023, 8, 20),
+    destinyName: "Fernando de Noronha, Baía do Sancho,",
     description:
-        "Viva uma experiência paradisíaca em Fernando de Noronha, um arquipélago com praias de tirar o fôlego e rica vida marinha. Faça mergulho, trilhas, e aproveite a tranquilidade e beleza natural desse destino único.",
+        "A Baía do Sancho, localizada em Fernando de Noronha, é uma das praias mais bonitas do mundo. Com águas cristalinas, areia branca e uma paisagem impressionante, a praia é um verdadeiro refúgio paradisíaco. Acessível por uma escada íngreme de madeira, a Baía do Sancho oferece uma experiência única aos visitantes, com mergulho, snorkeling e a chance de explorar a diversidade da vida marinha, incluindo tartarugas marinhas e golfinhos.",
     images: [
-      "fernando_noronha_image1.jpg",
-      "fernando_noronha_image2.jpg",
-      "fernando_noronha_image3.jpg"
+      "lib/assets/images/travels/travel.jpg",
+      "lib/assets/images/travels/travel.jpg",
+      "lib/assets/images/travels/travel.jpg",
     ],
-    interests: [
-      "Beaches",
-      "Diving",
-      "Nature",
-      "Ecotourism",
-      "Environmental Preservation",
-    ],
+    interests: ["praia", "mergulho", "golfinhos", "pôr do sol"],
     rating: 4.5,
   ),
   Travel(
-    userId: "user1",
-    destinyName: "Bonito, Mato Grosso do Sul",
-    departureDate: DateTime(2023, 9, 5),
-    returnDate: DateTime(2023, 9, 12),
+    destinyName: "Bonito, Gruta do Lago Azul,",
     description:
-        "Descubra a beleza natural de Bonito, com suas águas cristalinas, cachoeiras deslumbrantes e grutas subterrâneas. Faça flutuação em rios, explore trilhas ecológicas e aproveite as atividades de ecoturismo oferecidas na região.",
-    images: ["bonito_image1.jpg", "bonito_image2.jpg", "bonito_image3.jpg"],
-    interests: [
-      "Nature",
-      "Adventure",
-      "Ecotourism",
-      "Waterfalls",
-      "Environmental Preservation",
-    ],
-    rating: 4.8,
-  ),
-  Travel(
-    userId: "user2",
-    destinyName: "Gramado, Rio Grande do Sul",
-    departureDate: DateTime(2023, 10, 8),
-    returnDate: DateTime(2023, 10, 15),
-    description:
-        "Experimente o charme de Gramado, uma cidade encantadora com arquitetura europeia, belos jardins e clima serrano. Visite os parques temáticos, desfrute da culinária local e aproveite os festivais e eventos culturais da região.",
-    images: ["gramado_image1.jpg", "gramado_image2.jpg", "gramado_image3.jpg"],
-    interests: [
-      "Culture",
-      "Gastronomy",
-      "Nature",
-      "Festivals",
-      "Architecture",
-    ],
-    rating: 4.6,
-  ),
-  Travel(
-    userId: "user2",
-    destinyName: "Manaus, Amazonas",
-    departureDate: DateTime(2023, 11, 12),
-    returnDate: DateTime(2023, 11, 20),
-    description:
-        "Explore a exuberante cidade de Manaus, cercada pela Floresta Amazônica. Descubra a biodiversidade da região, faça passeios de barco pelos rios e visite o famoso Teatro Amazonas, um marco cultural da cidade.",
-    images: ["manaus_image1.jpg", "manaus_image2.jpg", "manaus_image3.jpg"],
-    interests: [
-      "Nature",
-      "Culture",
-      "Ecotourism",
-      "Architecture",
-    ],
-    rating: 4.9,
-  ),
-  Travel(
-    userId: "user2",
-    destinyName: "Búzios, Rio de Janeiro",
-    departureDate: DateTime(2024, 1, 5),
-    returnDate: DateTime(2024, 1, 12),
-    description:
-        "Visite Búzios, uma charmosa cidade litorânea no Rio de Janeiro, conhecida por suas praias deslumbrantes e atmosfera sofisticada. Explore as praias, pratique esportes aquáticos e aproveite a animada vida noturna.",
-    images: ["buzios_image1.jpg", "buzios_image2.jpg", "buzios_image3.jpg"],
-    interests: [
-      "Beaches",
-      "Gastronomy",
-      "Nightlife",
-      "Luxury Tourism",
-    ],
-    rating: 4.7,
-  ),
-  Travel(
-    userId: "user3",
-    destinyName: "Chapada dos Veadeiros, Goiás",
-    departureDate: DateTime(2024, 2, 20),
-    returnDate: DateTime(2024, 2, 27),
-    description:
-        "Embarque em uma aventura pela Chapada dos Veadeiros, uma região de natureza exuberante, com cachoeiras, trilhas e paisagens de tirar o fôlego. Explore os parques nacionais, desfrute de banhos em águas cristalinas e conecte-se com a natureza.",
+        "A Gruta do Lago Azul é uma caverna subterrânea localizada em Bonito, no estado de Mato Grosso do Sul. Seu principal atrativo é um lago de águas cristalinas e tonalidade azul intensa, que cria um cenário deslumbrante. A gruta é repleta de formações geológicas impressionantes, como estalactites e estalagmites, que proporcionam uma atmosfera mágica aos visitantes. É um local perfeito para os amantes da natureza e da aventura.",
     images: [
-      "chapada_veadeiros_image1.jpg",
-      "chapada_veadeiros_image2.jpg",
-      "chapada_veadeiros_image3.jpg"
+      "lib/assets/images/travels/travel.jpg",
+      "lib/assets/images/travels/travel.jpg",
+      "lib/assets/images/travels/travel.jpg",
     ],
-    interests: [
-      "Nature",
-      "Adventure",
-      "Waterfalls",
-      "Hiking",
-      "Environmental Preservation",
-    ],
-    rating: 4.9,
+    interests: ["caverna", "lago", "passeios"],
+    rating: 4.5,
   ),
   Travel(
-    userId: "user3",
-    destinyName: "Jericoacoara, Ceará",
-    departureDate: DateTime(2024, 3, 15),
-    returnDate: DateTime(2024, 3, 23),
+    destinyName: "Rio de Janeiro,Pão de Açúcar,",
     description:
-        "Viva dias inesquecíveis em Jericoacoara, uma praia paradisíaca com dunas, lagoas e cenários de tirar o fôlego. Pratique esportes de vento, faça passeios de buggy e aproveite o pôr do sol nas famosas dunas.",
+        "O Pão de Açúcar é um dos cartões-postais mais famosos do Rio de Janeiro. Trata-se de um complexo de montanhas localizado na entrada da Baía de Guanabara. A forma característica de seus picos, que se assemelham a um pão de açúcar, torna-o um ponto turístico emblemático. Os visitantes podem desfrutar de um passeio de bondinho até o topo, onde se deparam com uma vista deslumbrante da cidade, das praias e da paisagem montanhosa ao redor.",
     images: [
-      "jericoacoara_image1.jpg",
-      "jericoacoara_image2.jpg",
-      "jericoacoara_image3.jpg"
+      "lib/assets/images/travels/travel.jpg",
+      "lib/assets/images/travels/travel.jpg",
+      "lib/assets/images/travels/travel.jpg",
     ],
-    interests: [
-      "Beaches",
-      "Wind Sports",
-      "Nature",
-    ],
-    rating: 4.8,
+    interests: ["vista panorâmica", "escalada", "trilhas", "natureza"],
+    rating: 4.5,
   ),
   Travel(
-    userId: "user4",
-    destinyName: "Lençóis Maranhenses, Maranhão",
-    departureDate: DateTime(2024, 6, 20),
-    returnDate: DateTime(2024, 6, 28),
+    destinyName: "Foz do Iguaçu, Cataratas do Iguaçu,",
     description:
-        "Explore a beleza única dos Lençóis Maranhenses, um parque nacional com dunas, lagoas e paisagens deslumbrantes. Caminhe pelas dunas, refresque-se nas lagoas de água cristalina e maravilhe-se com a imensidão desse paraíso natural.",
+        "As Cataratas do Iguaçu são um espetáculo natural magnífico, localizado na fronteira entre o Brasil e a Argentina. Com mais de 270 quedas d'água, elas formam uma paisagem deslumbrante e imponente. O barulho ensurdecedor das águas e a nuvem constante de névoa criam uma experiência única e emocionante. Os visitantes podem explorar as cataratas por meio de trilhas e passarelas, além de desfrutar de passeios de barco que chegam bem próximo às quedas d'água. É um destino verdadeiramente impressionante e de tirar o fôlego.",
     images: [
-      "lencois_maranhenses_image1.jpg",
-      "lencois_maranhenses_image2.jpg",
-      "lencois_maranhenses_image3.jpg"
+      "lib/assets/images/travels/travel.jpg",
+      "lib/assets/images/travels/travel.jpg",
+      "lib/assets/images/travels/travel.jpg",
     ],
-    interests: [
-      "Nature",
-      "Adventure",
-      "Photography",
-      "Lagoons",
-      "Environmental Preservation",
-    ],
-    rating: 4.9,
+    interests: ["trilhas", "passeios", "natureza", "fotografia"],
+    rating: 4.5,
   ),
   Travel(
-    userId: "user4",
-    destinyName: "Bonito, Mato Grosso do Sul",
-    departureDate: DateTime(2024, 7, 10),
-    returnDate: DateTime(2024, 7, 18),
+    destinyName: "Rio de Janeiro,Cristo Redentor,",
     description:
-        "Descubra as águas cristalinas de Bonito, um destino de ecoturismo no coração do Brasil. Faça flutuação em rios de águas transparentes, mergulhe em cavernas e conheça a rica fauna e flora da região.",
-    images: ["bonito_image1.jpg", "bonito_image2.jpg", "bonito_image3.jpg"],
-    interests: [
-      "Beaches",
-      "Wind Sports",
-      "Buggy Rides",
-      "Nature",
-      "Sunset",
-    ],
-    rating: 4.6,
-  ),
-  Travel(
-    userId: "user5",
-    destinyName: "Fernando de Noronha, Pernambuco",
-    departureDate: DateTime(2024, 8, 15),
-    returnDate: DateTime(2024, 8, 23),
-    description:
-        "Viva uma experiência inesquecível em Fernando de Noronha, um arquipélago paradisíaco com praias de águas cristalinas e rica vida marinha. Faça mergulhos, trilhas e aprecie a beleza natural desse paraíso preservado.",
+        "O Cristo Redentor é um dos ícones mais conhecidos do Brasil e uma das Sete Maravilhas do Mundo Moderno. Localizado no topo do morro do Corcovado, no Rio de Janeiro, essa imponente estátua de Jesus Cristo de braços abertos oferece uma vista panorâmica incrível da cidade. Além de sua importância religiosa, o Cristo Redentor é uma atração turística imperdível, proporcionando uma experiência única e inesquecível aos visitantes.",
     images: [
-      "fernando_noronha_image1.jpg",
-      "fernando_noronha_image2.jpg",
-      "fernando_noronha_image3.jpg"
+      "lib/assets/images/travels/travel.jpg",
+      "lib/assets/images/travels/travel.jpg",
+      "lib/assets/images/travels/travel.jpg",
     ],
-    interests: [
-      "Nature",
-      "Ecotourism",
-      "Environmental Preservation",
-    ],
-    rating: 4.9,
-  ),
-  //
-  Travel(
-    userId: "user5",
-    destinyName: "Gramado, Rio Grande do Sul",
-    departureDate: DateTime(2024, 9, 10),
-    returnDate: DateTime(2024, 9, 18),
-    description:
-        "Encante-se com a atmosfera europeia de Gramado, uma cidade serrana no sul do Brasil. Explore a arquitetura charmosa, deguste chocolates artesanais, aproveite festivais temáticos e encante-se com as belezas naturais da região.",
-    images: ["gramado_image1.jpg", "gramado_image2.jpg", "gramado_image3.jpg"],
-    interests: [
-      "Clima Serrano",
-      "Cultura",
-      "Gastronomia",
-      "Festivais",
-      "Natureza"
-    ],
-    rating: 4.7,
-  ),
-  Travel(
-    userId: "user5",
-    destinyName: "Chapada dos Veadeiros, Goiás",
-    departureDate: DateTime(2024, 10, 8),
-    returnDate: DateTime(2024, 10, 15),
-    description:
-        "Explore as trilhas e cachoeiras da Chapada dos Veadeiros, um paraíso natural no centro do Brasil. Descubra paisagens deslumbrantes, banhe-se em piscinas naturais e conecte-se com a energia desse lugar místico.",
-    images: [
-      "chapada_veadeiros_image1.jpg",
-      "chapada_veadeiros_image2.jpg",
-      "chapada_veadeiros_image3.jpg"
-    ],
-    interests: [
-      "Natureza",
-      "Trilhas",
-      "Cachoeiras",
-      "Preservação Ambiental",
-      "Misticismo"
-    ],
-    rating: 4.6,
-  ),
-  Travel(
-    userId: "user6",
-    destinyName: "Praia do Forte, Bahia",
-    departureDate: DateTime(2024, 11, 12),
-    returnDate: DateTime(2024, 11, 20),
-    description:
-        "Relaxe nas belas praias da Praia do Forte, um refúgio tropical no nordeste do Brasil. Curta o sol, faça passeios de barco, visite o Projeto Tamar e desfrute da deliciosa gastronomia baiana.",
-    images: [
-      "praia_forte_image1.jpg",
-      "praia_forte_image2.jpg",
-      "praia_forte_image3.jpg"
-    ],
-    interests: [
-      "Praias",
-      "Natureza",
-      "Passeios de Barco",
-      "Preservação Ambiental",
-      "Gastronomia"
-    ],
-    rating: 4.9,
-  ),
-  Travel(
-    userId: "user6",
-    destinyName: "Manaus, Amazonas",
-    departureDate: DateTime(2024, 12, 5),
-    returnDate: DateTime(2024, 12, 12),
-    description:
-        "Adentre a Floresta Amazônica em Manaus, a capital do estado do Amazonas. Conheça o encontro das águas dos rios Negro e Solimões, faça passeios de barco pela selva, visite comunidades indígenas e desvende os segredos da maior floresta tropical do mundo.",
-    images: ["manaus_image1.jpg", "manaus_image2.jpg", "manaus_image3.jpg"],
-    interests: [
-      "Natureza",
-      "Floresta Amazônica",
-      "Passeios de Barco",
-      "Cultura Indígena",
-      "Preservação Ambiental"
-    ],
-    rating: 4.8,
-  ),
-  Travel(
-    userId: "user6",
-    destinyName: "Campos do Jordão, São Paulo",
-    departureDate: DateTime(2025, 1, 8),
-    returnDate: DateTime(2025, 1, 15),
-    description:
-        "Aproveite o clima ameno e a arquitetura europeia de Campos do Jordão, uma cidade serrana no estado de São Paulo. Explore os jardins, saboreie chocolates, visite o Palácio Boa Vista e desfrute de momentos aconchegantes nesse destino encantador.",
-    images: [
-      "campos_jordao_image1.jpg",
-      "campos_jordao_image2.jpg",
-      "campos_jordao_image3.jpg"
-    ],
-    interests: [
-      "Clima Serrano",
-      "Gastronomia",
-      "Natureza",
-      "Arquitetura",
-      "Passeios a Pé"
-    ],
-    rating: 4.7,
+    interests: ["vista panorâmica", "história", "trilha"],
+    rating: 4.5,
   ),
 ];

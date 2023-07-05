@@ -22,10 +22,7 @@ class HomeModule extends Module {
         ),
         ChildRoute(
           '/travelDetail',
-          child: (_, args) => TravelDetailsScreen(
-            currentUserId: args.data['userId'],
-            travel: args.data['travel'],
-          ),
+          child: (_, args) => TravelDetailsScreen(travel: args.data),
           transition: TransitionType.fadeIn,
         ),
       ];

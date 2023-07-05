@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
-          SuggestionsWidget(user: user),
+          const SuggestionsWidget(),
         ],
       ),
     );

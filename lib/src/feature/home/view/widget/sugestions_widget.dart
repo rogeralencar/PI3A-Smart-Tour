@@ -6,36 +6,20 @@ import '../../repository/dummy_travel_data.dart';
 import '../../repository/travel_model.dart';
 
 class SuggestionsWidget extends StatelessWidget {
-  final User user;
-  const SuggestionsWidget({Key? key, required this.user}) : super(key: key);
-
-  List<Travel> _generateSuggestions(User user) {
-    List<Travel> suggestions = [];
-
-    for (var travel in travelList) {
-      if (travel.interests
-          .any((interest) => user.interests.contains(interest))) {
-        suggestions.add(travel);
-      }
-    }
-
-    return suggestions;
-  }
+  const SuggestionsWidget({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<Travel> suggestions = [];
-    suggestions = _generateSuggestions(user);
     return Expanded(
       child: GridView.count(
         crossAxisCount: 2,
-        children: List.generate(suggestions.length, (index) {
+        children: List.generate(travelList.length, (index) {
           return GestureDetector(
             onTap: () {
-              Modular.to.pushNamed('travelDetail', arguments: {
-                'userId': user.userId,
-                'travel': suggestions[index],
-              });
+              Modular.to
+                  .pushNamed('travelDetail', arguments: travelList[index]);
             },
             child: Container(
               padding: const EdgeInsets.all(10),
@@ -50,7 +34,7 @@ class SuggestionsWidget extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: Image.asset(
-                  suggestions[index].images[0],
+                  travelList[index].images[0],
                   fit: BoxFit.cover,
                 ),
               ),
